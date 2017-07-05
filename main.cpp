@@ -3,6 +3,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 int main(){
 	std::vector <std::vector <std::string> > data;
@@ -30,7 +33,9 @@ int main(){
 
 	std::cout<<"yes"<<std::endl;
 	for(int x=0; x<data.size(); x++){
-		std::cout<<data[x][1]<<std::endl;
+		//if((data[x][21])!=0){
+			std::cout<<"Name: "<< data[x][1]<<" Salary: "<< data[x][21]<<std::endl;
+		//}
 	}
 
 	return 0;
