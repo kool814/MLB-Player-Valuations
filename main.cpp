@@ -9,7 +9,9 @@
 
 int main(){
 	std::vector <std::vector <std::string> > data;
-	std::ifstream infile( "2017_MLB_Player_Info.md" );
+	std::ifstream infile( "2017_MLB_Player_Salary_Info.md" );
+	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
+	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md.md" );
 
 	while (infile){
 		std::string s;
@@ -31,11 +33,11 @@ int main(){
 	    data.push_back( record );
 	}
 
-	std::cout<<"yes"<<std::endl;
+	//std::cout<<"yes"<<std::endl;
 	for(int x=0; x<data.size(); x++){
-		//if((data[x][21])!=0){
+		if((data[x][21])!=""){
 			std::cout<<"Name: "<< data[x][1]<<" Salary: "<< data[x][21]<<std::endl;
-		//}
+		}
 	}
 
 	return 0;
