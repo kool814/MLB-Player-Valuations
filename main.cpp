@@ -110,7 +110,7 @@ int main(){
 		}
 	}
 
-	if(map_pitcher_player.find("Clayton Kershaw")!=map_pitcher_player.end()){
+	if(map_pitcher_player.find("Mike Wright")!=map_pitcher_player.end()){
 		std::cout<<"map works!!"<<std::endl;
 	}
 
