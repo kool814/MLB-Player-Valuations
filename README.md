@@ -10,3 +10,6 @@ However these metrics are often relics of a pre-modern view of the game. Statisi
 
 ## Outcome
 Based on these newer metrics, we can recalculate a player's overall value and using their current salary, project which players are MLB's most undervalued and overvalued players.
+
+## Data
+Data and statistics taken from fangraphs.com and baseball-reference.com
