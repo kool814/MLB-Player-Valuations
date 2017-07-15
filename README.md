@@ -3,6 +3,7 @@ Analysis of Major League Baseball Player value through salary compensation
 
 This project analyzes the most undervalued and overvalued MLB players by using metrics to determine the true value of a player when compared to their salary.
 
+
 ## Theory
 In Major League Baseball, statistics like Runs Batted In, Batting Average, and Stolen Bases are the most common metrics used to determine the overall value of a player and the player's impact to a team. Given these statistics, most major league teams offer salaries and contracts that are largely based on these metrics. 
 
