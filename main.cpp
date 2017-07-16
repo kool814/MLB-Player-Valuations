@@ -20,6 +20,7 @@ int main(){
 	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
 
 	int count=0;
+	
 	while (infile){
 		std::string s;
 	    if (!getline( infile, s )){
