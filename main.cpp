@@ -8,6 +8,10 @@
 #include <ctype.h>
 #include <map>
 
+std::map<std::string, std::vector <std::vector <std::string> > > parse_data(std::ifstream){
+	
+}
+
 int main(){
 	std::vector <std::vector <std::string> > data;
 	std::map<std::string, std::vector <std::vector <std::string> > > map_player_salary;
