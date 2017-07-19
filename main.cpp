@@ -8,7 +8,7 @@
 #include <ctype.h>
 #include <map>
 
-std::map<std::string, std::vector <std::vector <std::string> > > parse_data(std::ifstream){
+std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std::ifstream &data){
 	
 }
 
