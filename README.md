@@ -9,6 +9,7 @@ In Major League Baseball, statistics like Runs Batted In, Batting Average, and S
 
 However these metrics are often relics of a pre-modern view of the game. Statisical analysis has proven that On-base percentage (OBP) and Slugging percentage (SLG) are better indicators of offensive success and with newer metrics like Wins Above Replacement (WAR) and Fielding Independent Pitching (FIP), teams can get a better indication of how much a player is truly worth to a team. 
 
+
 ## Outcome
 Based on these newer metrics, we can recalculate a player's overall value and using their current salary, project which players are MLB's most undervalued and overvalued players.
 
