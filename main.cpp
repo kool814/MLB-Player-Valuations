@@ -9,7 +9,39 @@
 #include <map>
 
 std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std::ifstream &data){
+	int count=0;
 	
+	while (infile){
+		std::string s;
+	    if (!getline( infile, s )){
+	    	break;
+	    }
+	    std::istringstream ss( s );
+	    std::vector <std::string> record;
+
+	    while (ss){
+	      std::string s;
+	      if (!getline( ss, s, ',' )){
+	      	break;
+	      }
+	      record.push_back( s );
+	    }
+	    data.push_back( record );
+	    std::string full_name= data[count][1];
+	    std::string modified_name="";
+	    int x=0;
+	    while(x<full_name.size()){
+	    	if(full_name[x]!='\\'){
+	    		modified_name.push_back(full_name[x]);
+	    	}else{
+	    		modified_name.pop_back();
+	    		break;
+	    	}
+	    	x++;
+	    }
+		map_player_salary.insert(std::make_pair(modified_name, data));
+		count++;
+	}
 
 	
 	
