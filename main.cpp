@@ -56,6 +56,8 @@ int main(){
 	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
 	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
 
+	data= parse_data(infile);
+	/*
 	int count=0;
 	
 	while (infile){
@@ -90,7 +92,7 @@ int main(){
 		map_player_salary.insert(std::make_pair(modified_name, data));
 		count++;
 	}
-
+	*/
 	//test if player salary data works 
 	for(int x=0; x<data.size(); x++){
 		if((data[x][21])!=""){
@@ -102,6 +104,8 @@ int main(){
 		std::cout<<"map works!!"<<std::endl;
 	}
 
+/*
+	
 	//parse thru player pitcher info and store everything into a map
 	count=0;
 	while (infile_pitcher){
@@ -149,6 +153,6 @@ int main(){
 	if(map_pitcher_player.find("Mike Wright")!=map_pitcher_player.end()){
 		std::cout<<"map works!!"<<std::endl;
 	}
-
+	*/
 	return 0;
 }
