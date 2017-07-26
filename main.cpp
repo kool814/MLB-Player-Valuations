@@ -8,9 +8,12 @@
 #include <ctype.h>
 #include <map>
 
+std::vector <std::vector <std::string> > data;
+std::map<std::string, std::vector <std::vector <std::string> > > map_player_salary;
+
 std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std::ifstream &instream_data){
 	int count=0;
-	
+	//std::vector <std::vector <std::string> > data;
 	while (instream_data){
 		std::string s;
 	    if (!getline( instream_data, s )){
@@ -42,12 +45,12 @@ std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std
 		map_player_salary.insert(std::make_pair(modified_name, data));
 		count++;
 	}
-	return data;
+	return map_player_salary;
 }
 
 int main(){
-	std::vector <std::vector <std::string> > data;
-	std::map<std::string, std::vector <std::vector <std::string> > > map_player_salary;
+	// std::vector <std::vector <std::string> > data;
+	// std::map<std::string, std::vector <std::vector <std::string> > > map_player_salary;
 
 	std::vector <std::vector <std::string> > pitcher_data;
 	std::map<std::string, std::vector <std::vector <std::string> > > map_pitcher_player;
@@ -56,7 +59,7 @@ int main(){
 	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
 	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
 
-	data= parse_data(infile);
+	map_player_salary= parse_data(infile);
 	/*
 	int count=0;
 	
