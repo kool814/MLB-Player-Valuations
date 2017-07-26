@@ -8,12 +8,12 @@
 #include <ctype.h>
 #include <map>
 
-std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std::ifstream &data){
+std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std::ifstream &instream_data){
 	int count=0;
 	
-	while (infile){
+	while (instream_data){
 		std::string s;
-	    if (!getline( infile, s )){
+	    if (!getline( instream_data, s )){
 	    	break;
 	    }
 	    std::istringstream ss( s );
@@ -42,9 +42,7 @@ std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std
 		map_player_salary.insert(std::make_pair(modified_name, data));
 		count++;
 	}
-
-	
-	
+	return data;
 }
 
 int main(){
