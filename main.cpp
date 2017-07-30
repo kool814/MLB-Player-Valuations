@@ -8,41 +8,40 @@
 #include <ctype.h>
 #include <map>
 
-// std::map<std::string, std::vector <std::vector <std::string> > >& parse_data(std::ifstream &instream_data){
-// 	int count=0;
-// 	while (instream_data){
-// 		std::string s;
-// 	    if (!getline( instream_data, s )){
-// 	    	break;
-// 	    }
-// 	    std::istringstream ss( s );
-// 	    std::vector <std::string> record;
-
-// 	    while (ss){
-// 	      std::string s;
-// 	      if (!getline( ss, s, ',' )){
-// 	      	break;
-// 	      }
-// 	      record.push_back( s );
-// 	    }
-// 	    data.push_back( record );
-// 	    std::string full_name= data[count][1];
-// 	    std::string modified_name="";
-// 	    int x=0;
-// 	    while(x<full_name.size()){
-// 	    	if(full_name[x]!='\\'){
-// 	    		modified_name.push_back(full_name[x]);
-// 	    	}else{
-// 	    		modified_name.pop_back();
-// 	    		break;
-// 	    	}
-// 	    	x++;
-// 	    }
-// 		map_player_salary.insert(std::make_pair(modified_name, data));
-// 		count++;
-// 	}
-// 	return map_player_salary;
-// }
+void parse_data(std::ifstream &instream_data, std::vector <std::vector <std::string> >& vec_data,
+	std::map<std::string, std::vector <std::vector <std::string> > >& map_data){
+	int count=0;
+	while (instream_data){
+		std::string s;
+	    if (!getline( instream_data, s )){
+	    	break;
+	    }
+	    std::istringstream ss( s );
+	    std::vector <std::string> record;
+	    while (ss){
+	      std::string s;
+	      if (!getline( ss, s, ',' )){
+	      	break;
+	      }
+	      record.push_back( s );
+	    }
+	    vec_data.push_back(record);
+	    std::string full_name= vec_data[count][1];
+	    std::string modified_name="";
+	    int x=0;
+	    while(x<full_name.size()){
+	    	if(full_name[x]!='\\'){
+	    		modified_name.push_back(full_name[x]);
+	    	}else{
+	    		modified_name.pop_back();
+	    		break;
+	    	}
+	    	x++;
+	    }
+		map_data.insert(std::make_pair(modified_name, vec_data));
+		count++;
+	}
+}
 
 int main(){
 	std::vector <std::vector <std::string> > data;
@@ -55,43 +54,43 @@ int main(){
 	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
 	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
 
-	//map_player_salary= parse_data(infile);
+	parse_data(infile, data, map_player_salary);
 	
 	int count=0;
 	
-	while (infile){
-		std::string s;
-	    if (!getline( infile, s )){
-	    	break;
-	    }
-	    std::istringstream ss( s );
-	    std::vector <std::string> record;
+	// while (infile){
+	// 	std::string s;
+	//     if (!getline( infile, s )){
+	//     	break;
+	//     }
+	//     std::istringstream ss( s );
+	//     std::vector <std::string> record;
 
-	    while (ss){
-	      std::string s;
-	      if (!getline( ss, s, ',' )){
-	      	break;
-	      }
-	      record.push_back( s );
-	    }
+	//     while (ss){
+	//       std::string s;
+	//       if (!getline( ss, s, ',' )){
+	//       	break;
+	//       }
+	//       record.push_back( s );
+	//     }
 
-	    data.push_back( record );
-	    std::string full_name= data[count][1];
-	    std::string modified_name="";
-	    int x=0;
-	    while(x<full_name.size()){
-	    	if(full_name[x]!='\\'){
-	    		modified_name.push_back(full_name[x]);
-	    	}else{
-	    		modified_name.pop_back();
-	    		break;
-	    	}
-	    	x++;
-	    }
-		map_player_salary.insert(std::make_pair(modified_name, data));
-		count++;
-	}
-	
+	//     data.push_back( record );
+	//     std::string full_name= data[count][1];
+	//     std::string modified_name="";
+	//     int x=0;
+	//     while(x<full_name.size()){
+	//     	if(full_name[x]!='\\'){
+	//     		modified_name.push_back(full_name[x]);
+	//     	}else{
+	//     		modified_name.pop_back();
+	//     		break;
+	//     	}
+	//     	x++;
+	//     }
+	// 	map_player_salary.insert(std::make_pair(modified_name, data));
+	// 	count++;
+	// }
+
 	//test if player salary data works 
 	for(int x=0; x<data.size(); x++){
 		if((data[x][21])!=""){
@@ -103,43 +102,43 @@ int main(){
 		std::cout<<"map works!!"<<std::endl;
 	}
 
-	//map_pitcher_player= parse_data(infile_pitcher);
+	parse_data(infile_pitcher, pitcher_data, map_pitcher_player);
 	
-	//parse thru player pitcher info and store everything into a map
-	count=0;
-	while (infile_pitcher){
-		std::string s;
-	    if (!getline( infile_pitcher, s )){
-	    	break;
-	    }
+	// //parse thru player pitcher info and store everything into a map
+	// count=0;
+	// while (infile_pitcher){
+	// 	std::string s;
+	//     if (!getline( infile_pitcher, s )){
+	//     	break;
+	//     }
 
-	    std::istringstream ss( s );
-	    std::vector <std::string> record;
+	//     std::istringstream ss( s );
+	//     std::vector <std::string> record;
 
-	    while (ss){
-	      std::string s;
-	      if (!getline( ss, s, ',' )){
-	      	break;
-	      }
-	      record.push_back( s );
-	    }
+	//     while (ss){
+	//       std::string s;
+	//       if (!getline( ss, s, ',' )){
+	//       	break;
+	//       }
+	//       record.push_back( s );
+	//     }
 
-	    pitcher_data.push_back( record );
-	    std::string full_name= pitcher_data[count][1];
-	    std::string modified_name="";
-	    int x=0;
-	    while(x<full_name.size()){
-	    	if(full_name[x]!='\\'){
-	    		modified_name.push_back(full_name[x]);
-	    	}else{
-	    		modified_name.pop_back();
-	    		break;
-	    	}
-	    	x++;
-	    }
-		map_pitcher_player.insert(std::make_pair(modified_name, pitcher_data));
-		count++;
-	}
+	//     pitcher_data.push_back( record );
+	//     std::string full_name= pitcher_data[count][1];
+	//     std::string modified_name="";
+	//     int x=0;
+	//     while(x<full_name.size()){
+	//     	if(full_name[x]!='\\'){
+	//     		modified_name.push_back(full_name[x]);
+	//     	}else{
+	//     		modified_name.pop_back();
+	//     		break;
+	//     	}
+	//     	x++;
+	//     }
+	// 	map_pitcher_player.insert(std::make_pair(modified_name, pitcher_data));
+	// 	count++;
+	// }
 
 
 	//test if pitcher player data works 
@@ -152,5 +151,6 @@ int main(){
 	if(map_pitcher_player.find("Mike Wright")!=map_pitcher_player.end()){
 		std::cout<<"map works!!"<<std::endl;
 	}
+
 	return 0;
 }
