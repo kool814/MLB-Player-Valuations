@@ -50,10 +50,15 @@ int main(){
 	std::vector <std::vector <std::string> > pitcher_data;
 	std::map<std::string, std::vector <std::vector <std::string> > > map_pitcher_player;
 
-	std::ifstream infile( "2017_MLB_Player_Salary_Info.md" );
-	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
-	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
+	std::vector <std::vector <std::string> > batter_data;
+	std::map<std::string, std::vector <std::vector <std::string> > > map_batter_player;
 
+	std::ifstream infile( "2017_MLB_Player_Salary_Info.md" );
+	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
+	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
+
+
+	//parse_data for salary info
 	parse_data(infile, data, map_player_salary);
 	
 	//test if player salary data works 
@@ -66,6 +71,8 @@ int main(){
 		std::cout<<"map works!!"<<std::endl;
 	}
 
+
+	//parse data for pitcher info
 	parse_data(infile_pitcher, pitcher_data, map_pitcher_player);
 
 	//test if pitcher player data works 
@@ -78,5 +85,19 @@ int main(){
 		std::cout<<"map works!!"<<std::endl;
 	}
 
+
+	//parse data for batter info
+	parse_data(infile_batter, batter_data, map_batter_player);
+
+	//test if pitcher player data works 
+	for(int x=0; x<pitcher_data.size(); x++){
+		if((pitcher_data[x][1])!="Name"){
+			std::cout<<"Name: "<< pitcher_data[x][1]<<" ERA: "<< pitcher_data[x][8]<<std::endl;
+		}
+	}
+	if(map_pitcher_player.find("Mike Wright")!=map_pitcher_player.end()){
+		std::cout<<"map works!!"<<std::endl;
+	}
+	
 	return 0;
 }
