@@ -62,12 +62,14 @@ int main(){
 	parse_data(infile, data, map_player_salary);
 	
 	//test if player salary data works 
-	for(int x=0; x<data.size(); x++){
-		if((data[x][21])!=""){
-			std::cout<<"Name: "<< data[x][1]<<" Salary: "<< data[x][21]<<std::endl;
-		}
-	}
+	// for(int x=0; x<data.size(); x++){
+	// 	if((data[x][21])!=""){
+	// 		std::cout<<"Name: "<< data[x][1]<<" Salary: "<< data[x][21]<<std::endl;
+	// 	}
+	// }
 	if(map_player_salary.find("Clayton Kershaw")!=map_player_salary.end()){
+
+		std::cout<<"Clayton Kershaw's Salary: "<<map_player_salary.find("Clayton Kershaw")->second[1][21]<<std::endl;
 		std::cout<<"map works!!"<<std::endl;
 	}
 
@@ -75,13 +77,14 @@ int main(){
 	//parse data for pitcher info
 	parse_data(infile_pitcher, pitcher_data, map_pitcher_player);
 
-	//test if pitcher player data works 
-	for(int x=0; x<pitcher_data.size(); x++){
-		if((pitcher_data[x][1])!="Name"){
-			std::cout<<"Name: "<< pitcher_data[x][1]<<" ERA: "<< pitcher_data[x][8]<<std::endl;
-		}
-	}
-	if(map_pitcher_player.find("Mike Wright")!=map_pitcher_player.end()){
+	// test if pitcher player data works 
+	// for(int x=0; x<pitcher_data.size(); x++){
+	// 	if((pitcher_data[x][1])!="Name"){
+	// 		std::cout<<"Name: "<< pitcher_data[x][1]<<" ERA: "<< pitcher_data[x][8]<<std::endl;
+	// 	}
+	// }
+	if(map_pitcher_player.find("Fernando Abad")!=map_pitcher_player.end()){
+		std::cout<<"Fernando Abad's ERA: "<<map_pitcher_player.find("Fernando Abad")->second[1][8]<<std::endl;
 		std::cout<<"map works!!"<<std::endl;
 	}
 
@@ -90,12 +93,13 @@ int main(){
 	parse_data(infile_batter, batter_data, map_batter_player);
 
 	//test if pitcher player data works 
-	for(int x=0; x<batter_data.size(); x++){
-		if((batter_data[x][1])!="Name"){
-			std::cout<<"Name: "<< batter_data[x][1]<<" BA: "<< batter_data[x][18]<<std::endl;
-		}
-	}
-	if(map_batter_player.find("Jose Abreu")!=map_batter_player.end()){
+	// for(int x=0; x<batter_data.size(); x++){
+	// 	if((batter_data[x][1])!="Name"){
+	// 		std::cout<<"Name: "<< batter_data[x][1]<<" BA: "<< batter_data[x][18]<<std::endl;
+	// 	}
+	// }
+	if(map_batter_player.find("Mike Zunino")!=map_batter_player.end()){
+		std::cout<<"Mike Zunino's BA: "<<map_batter_player.find("Mike Zunino")->second[1][1]<<std::endl;
 		std::cout<<"map works!!"<<std::endl;
 	}
 	
