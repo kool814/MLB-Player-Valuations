@@ -90,12 +90,12 @@ int main(){
 	parse_data(infile_batter, batter_data, map_batter_player);
 
 	//test if pitcher player data works 
-	for(int x=0; x<pitcher_data.size(); x++){
-		if((pitcher_data[x][1])!="Name"){
-			std::cout<<"Name: "<< pitcher_data[x][1]<<" ERA: "<< pitcher_data[x][8]<<std::endl;
+	for(int x=0; x<batter_data.size(); x++){
+		if((batter_data[x][1])!="Name"){
+			std::cout<<"Name: "<< batter_data[x][1]<<" BA: "<< batter_data[x][18]<<std::endl;
 		}
 	}
-	if(map_pitcher_player.find("Mike Wright")!=map_pitcher_player.end()){
+	if(map_batter_player.find("Jose Abreu")!=map_batter_player.end()){
 		std::cout<<"map works!!"<<std::endl;
 	}
 	
