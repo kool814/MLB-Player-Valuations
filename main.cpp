@@ -44,6 +44,7 @@ void parse_data(std::ifstream &instream_data,std::map<std::string, std::vector <
 	}
 }
 
+//int main(int argc, char** argv)
 int main(){
 	std::map<std::string, std::vector <std::string> >  map_salary;
 	std::map<std::string, std::vector <std::string> >  map_pitcher_player;
@@ -52,6 +53,24 @@ int main(){
 	std::ifstream infile( "2017_MLB_Player_Salary_Info.md" );
 	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
 	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
+
+
+	// std::string user_option = "";
+	// std::cout << "Would you like to view a particular player's value or a list of players ranked by value?: ";
+	// getline(std::cin, player_name);
+	// std::cout << "You entered: " << player_name << std::endl;
+	// std::cin.clear();
+
+	std::string player_name = "";
+	std::cout << "Please enter a players name: ";
+	getline(std::cin, player_name);
+	std::cout << "You entered: " << player_name << std::endl;
+	std::cin.clear();
+
+	std::string player_position = "";
+	std::cout << "Is "<< player_name<< " a Pitcher or Batter?: ";
+	getline(std::cin, player_position);
+	std::cout << "You entered: " << player_position << std::endl;
 
 
 	//parse_data for salary info
