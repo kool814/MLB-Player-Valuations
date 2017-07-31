@@ -14,3 +14,7 @@ Based on these newer metrics, we can recalculate a player's overall value and us
 
 ## Data
 Data and statistics taken from [www.fangraphs.com](http://www.fangraphs.com/) and [www.baseball-reference.com](http://www.baseball-reference.com/).
+
+
+
+Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
