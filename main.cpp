@@ -94,13 +94,13 @@ int main(){
 		// std::cout<<"map works!!"<<std::endl;
 	}
 
-	float run_creation=0.0;
-	//Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
-	parse_data(infile_batter, map_batter_player);
-	if(map_batter_player.find("LgAvg per 600 PA")!=map_batter_player.end()){
-		run_creation= map_batter_player.find("LgAvg per 600 PA")->second[18]
-		//std::cout<<"Ryan Zimmerman's BA: "<< map_batter_player.find("Ryan Zimmerman")->second[18]<<std::endl;
-	}
+	// float run_creation=0.0;
+	// //Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
+	// parse_data(infile_batter, map_batter_player);
+	// if(map_batter_player.find("LgAvg per 600 PA")!=map_batter_player.end()){
+	// 	run_creation= (map_batter_player.find("LgAvg per 600 PA")->second[9] + map_batter_player.find("LgAvg per 600 PA")->second[9])
+	// 	//std::cout<<"Ryan Zimmerman's BA: "<< map_batter_player.find("Ryan Zimmerman")->second[18]<<std::endl;
+	// }
 
 	
 	return 0;
