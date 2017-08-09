@@ -87,12 +87,12 @@ int main(){
 		std::cout<<"Tim Adleman's ERA: "<<map_pitcher_player.find("Tim Adleman")->second[8]<<std::endl;
 	}
 
-	// //parse data for batter info
-	// parse_data(infile_batter, map_batter_player);
-	// if(map_batter_player.find("Ryan Zimmerman")!=map_batter_player.end()){
-	// 	std::cout<<"Ryan Zimmerman's BA: "<< map_batter_player.find("Ryan Zimmerman")->second[18]<<std::endl;
-	// 	// std::cout<<"map works!!"<<std::endl;
-	// }
+	//parse data for batter info
+	parse_data(infile_batter, map_batter_player);
+	if(map_batter_player.find("Ryan Zimmerman")!=map_batter_player.end()){
+		std::cout<<"Ryan Zimmerman's BA: "<< map_batter_player.find("Ryan Zimmerman")->second[18]<<std::endl;
+		// std::cout<<"map works!!"<<std::endl;
+	}
 
 	float run_creation=0.0;
 	//Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
