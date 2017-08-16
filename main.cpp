@@ -72,9 +72,6 @@ int main(){
 	getline(std::cin, player_position);
 	std::cout << "You entered: " << player_position << std::endl;
 
-
-
-
 	//parse_data for salary info
 	parse_data(infile, map_salary);
 	if(map_salary.find("Yoenis Cespedes")!=map_salary.end()){
