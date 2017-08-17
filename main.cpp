@@ -54,12 +54,11 @@ int main(){
 	std::ifstream infile_pitcher( "2017_MLB_Pitcher_Info.md" );
 	std::ifstream infile_batter( "2017_MLB_Batter_Info.md" );
 
-
-	// std::string user_option = "";
-	// std::cout << "Would you like to view a particular player's value or a list of players ranked by value?: ";
-	// getline(std::cin, player_name);
-	// std::cout << "You entered: " << player_name << std::endl;
-	// std::cin.clear();
+	std::string user_option = "";
+	std::cout << "Would you like to view a particular player's value or a list of players ranked by value?: ";
+	getline(std::cin, player_name);
+	std::cout << "You entered: " << player_name << std::endl;
+	std::cin.clear();
 
 	std::string player_name = "";
 	std::cout << "Please enter a players name: ";
