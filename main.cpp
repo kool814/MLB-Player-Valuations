@@ -60,6 +60,8 @@ int main(){
 	// std::cout << "You entered: " << player_name << std::endl;
 	// std::cin.clear();
 
+
+
 	std::string player_name = "";
 	std::cout << "Please enter a players name: ";
 	getline(std::cin, player_name);
