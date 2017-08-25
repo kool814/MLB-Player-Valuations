@@ -68,10 +68,10 @@ int main(){
 	// std::cout << "You entered: " << player_name << std::endl;
 	// std::cin.clear();
 
-	std::string player_position = "";
-	std::cout << "Is "<< player_name<< " a Pitcher or Batter?: ";
-	getline(std::cin, player_position);
-	std::cout << "You entered: " << player_position << std::endl;
+	// std::string player_position = "";
+	// std::cout << "Is "<< player_name<< " a Pitcher or Batter?: ";
+	// getline(std::cin, player_position);
+	// std::cout << "You entered: " << player_position << std::endl;
 
 	//parse_data for salary info
 	parse_data(infile, map_salary);
