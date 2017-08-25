@@ -62,11 +62,11 @@ int main(){
 
 
 
-	std::string player_name = "";
-	std::cout << "Please enter a players name: ";
-	getline(std::cin, player_name);
-	std::cout << "You entered: " << player_name << std::endl;
-	std::cin.clear();
+	// std::string player_name = "";
+	// std::cout << "Please enter a players name: ";
+	// getline(std::cin, player_name);
+	// std::cout << "You entered: " << player_name << std::endl;
+	// std::cin.clear();
 
 	std::string player_position = "";
 	std::cout << "Is "<< player_name<< " a Pitcher or Batter?: ";
