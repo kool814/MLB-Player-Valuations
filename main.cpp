@@ -89,7 +89,6 @@ int main(){
 	parse_data(infile_batter, map_batter_player);
 	if(map_batter_player.find("Ryan Zimmerman")!=map_batter_player.end()){
 		std::cout<<"Ryan Zimmerman's BA: "<< map_batter_player.find("Ryan Zimmerman")->second[18]<<std::endl;
-		// std::cout<<"map works!!"<<std::endl;
 	}
 
 	float run_creation=0.0;
