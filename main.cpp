@@ -92,7 +92,7 @@ int main(){
 	}
 
 	float run_creation=0.0;
-	Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
+	// Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
 	parse_data(infile_batter, map_batter_player);
 	if(map_batter_player.find("LgAvg per 600 PA")!=map_batter_player.end()){
 		run_creation= (map_batter_player.find("LgAvg per 600 PA")->second[9] + map_batter_player.find("LgAvg per 600 PA")->second[9])
