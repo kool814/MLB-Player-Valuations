@@ -1,5 +1,5 @@
 Python dictionary
 key: Player Name
 Value: another dictionary
-	key: each team teh player was on
+	key: each team the player was on
 	value: a class containing that line of stats
