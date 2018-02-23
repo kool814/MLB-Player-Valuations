@@ -4,7 +4,7 @@
 
 import math
 
-def parse_salary_data(dict, salary_data):
+def parse_salary_data(salary_dict, salary_data):
     '''
     Given the salary data info, parse the info and store the player, team, 
     and yearly salary data.
@@ -22,23 +22,29 @@ def parse_salary_data(dict, salary_data):
                 player_name +=" "
                 player_name +=player_name_split_space[1]
             
-            team= line[4]
-            salary= line[22]
+            team= line[3]
+            salary= line[21]
             
-            if player_name in dict:
+            if player_name in salary_dict:
                 ''' if the player is already in the dictionary, then add them to another team '''
             else:
                 ''' add them to the dictionary'''
+                # print(salary_dict)
+                team_dict={}
+                team_dict[team]=salary
+                salary_dict[player_name]=team_dict
 
-            print(player_name)
+            # print(player_name)
 
 
 if __name__ == "__main__":
     salary_data_dict = {}
     salary_data_dict['player'] = {}
     salary_data_dict['player']['team'] = 'stats'
-    print(salary_data_dict)
+    #print(salary_data_dict)
 
     parse_salary_data(salary_data_dict, 
                 "/Users/karthiksuresh/Documents/GitHub/MLB-Player-Valuations/2017_MLB_Player_Salary_Info.md")
+
+    # print(salary_data_dict)
     
