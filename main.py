@@ -24,14 +24,15 @@ def parse_salary_data(salary_dict, salary_data):
             
             team= line[3]
             salary= line[21]
+            team_dict={}
+            team_dict[team]=salary
             
             if player_name in salary_dict:
                 ''' if the player is already in the dictionary, then add them to another team '''
+                salary_dict[player_name].update(team_dict)
             else:
                 ''' add them to the dictionary'''
                 # print(salary_dict)
-                team_dict={}
-                team_dict[team]=salary
                 salary_dict[player_name]=team_dict
 
             # print(player_name)
@@ -46,5 +47,12 @@ if __name__ == "__main__":
     parse_salary_data(salary_data_dict, 
                 "/Users/karthiksuresh/Documents/GitHub/MLB-Player-Valuations/2017_MLB_Player_Salary_Info.md")
 
+    for player in salary_data_dict:
+        for team in salary_data_dict[player]:
+            if(salary_data_dict[player][team]!=''):
+                print(player+': '+salary_data_dict[player][team])
+            else:
+                print(player+' has no salary!')
+            # print(salary_data_dict[player])
     # print(salary_data_dict)
     
