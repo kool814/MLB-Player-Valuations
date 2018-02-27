@@ -37,6 +37,16 @@ def parse_salary_data(salary_dict, salary_data):
 
             # print(player_name)
 
+def parse_pitcher_data(pitcher_dict, pitcher_data):
+    
+    with open(pitcher_data) as data:
+        
+        for line in data:
+            line = line.strip().split(",")
+            
+            
+
+
 
 if __name__ == "__main__":
     salary_data_dict = {}
