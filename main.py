@@ -3,6 +3,7 @@
 #Dictionary with key: Player and value: Dictionary containing key:Team and value: stats 
 
 import math
+from Pitcher import *
 
 def parse_salary_data(salary_dict, salary_data):
     '''
@@ -44,6 +45,22 @@ def parse_pitcher_data(pitcher_dict, pitcher_data):
         for line in data:
             line = line.strip().split(",")
             
+            playername = line[1].strip().split(" ")
+            name = ""
+            for i in range(len(playername)-1):
+                name += (" " + playername[i])
+            
+            p = Pitcher(name, line[2],line[3], line[4])
+            p.set_wl(line[5],line[6],line[7])
+            p.set_stats(l[8:])
+            team = line[3]
+            if name in pitcher_dict.keys():
+                pitcher_dict[name][team] = p
+            else:
+                team_dict = {}
+                team_dict[team] = p
+                pictcher_dict[name] = team_dict
+
             
 
 
@@ -65,4 +82,6 @@ if __name__ == "__main__":
                 print(player+' has no salary!')
             # print(salary_data_dict[player])
     # print(salary_data_dict)
+    
+    
     
