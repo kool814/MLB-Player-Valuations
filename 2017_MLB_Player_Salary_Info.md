@@ -2,8 +2,8 @@ Rk,Name,Age,Tm,G,PA,Rbat,Rbaser,Rdp,Rfield,Rpos,RAA,WAA,Rrep,RAR,WAR,waaWL%,162W
 1,Fernando Abad \abadfe01,31,BOS,4,0,0,0,0,0,0,0,0.0,0,0,0.0,.500,.500,0.0,0.0,0,2000000,Traded,1
 2,Jose Abreu \abreujo02,30,CHW,156,675,34,1,-2,0,-9,24,2.4,24,47,4.7,.515,.514,4.7,-0.9,47,10825000,Amateur Free Agent,3D
 3,Cristhian Adames \adamecr01,25,COL,12,14,-4,0,0,-1,0,-4,-0.5,0,-4,-0.4,.462,.497,-0.3,-0.1,-3,540000,Amateur Free Agent,/346
-4,Austin Adams \adamsau02,26,WSN,6,0,0,0,0,0,0,0,0.0,0,0,0.0,.500,.500,0.0,0.0,0,,Traded,/1
-5,Lane Adams \adamsla01,27,ATL,85,122,2,2,0,-2,-1,1,0.1,4,5,0.5,.501,.501,0.7,-0.3,7,,Free Agency,78/9
+4,Austin Adams \adamsau02,26,WSN,6,0,0,0,0,0,0,0,0.0,0,0,0.0,.500,.500,0.0,0.0,0,507500,Traded,/1
+5,Lane Adams \adamsla01,27,ATL,85,122,2,2,0,-2,-1,1,0.1,4,5,0.5,.501,.501,0.7,-0.3,7,200000,Free Agency,78/9
 6,Matt Adams \adamsma01,28,2TM,131,367,4,-2,0,-4,-4,-6,-0.7,12,6,0.5,.495,.498,0.8,-0.9,10,2800000,Traded,37
 7,Jim Adduci \adducji02,32,DET,29,93,0,0,0,3,-1,2,0.2,3,5,0.5,.507,.501,0.2,0.2,2,,Free Agency,9/D
 8,Tim Adleman \adlemti01,29,CIN,27,32,-6,0,1,0,5,-1,-0.1,0,-1,-0.1,.498,.500,-0.1,0.0,-1,,Free Agency,1
@@ -83,7 +83,7 @@ Rk,Name,Age,Tm,G,PA,Rbat,Rbaser,Rdp,Rfield,Rpos,RAA,WAA,Rrep,RAR,WAR,waaWL%,162W
 82,Kyle Barraclough \barraky01,27,MIA,62,1,0,0,0,0,0,0,0.0,0,0,0.0,.500,.500,0.0,0.0,0,536500,Traded,1
 83,Franklin Barreto \barrefr02,21,OAK,25,76,-3,1,0,-5,1,-6,-0.6,3,-3,-0.3,.476,.496,0.2,-0.4,2,,Traded,64/D
 84,Jake Barrett \barreja01,25,ARI,28,0,0,0,0,0,0,0,0.0,0,0,0.0,.500,.500,0.0,0.0,0,548300,Amateur Draft,1
-85,Anthony Bass \bassan01,29,TEX,0,,0,0,0,0,,,,,,,,,,,,,Free Agency,/1
+85,Anthony Bass \bassan01,29,TEX,0,,0,0,0,0,,,,,,,,,,,,725000,Free Agency,/1
 86,Antonio Bastardo \bastaan01,31,PIT,8,1,0,0,0,0,0,1,0.1,0,1,0.1,.506,.500,0.1,0.0,1,6625000,Traded,/1
 87,Trevor Bauer \bauertr01,26,CLE,2,3,-1,0,0,0,0,0,0.0,0,0,0.0,.480,.500,0.0,0.0,0,3550000,Traded,1
 88,Buddy Baumann \baumabu01,29,SDP,22,0,0,0,0,0,0,0,0.0,0,0,0.0,.500,.500,0.0,0.0,0,535700,Free Agency,1
