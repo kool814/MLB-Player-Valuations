@@ -27,7 +27,7 @@ def parse_salary_data(salary_dict, salary_data):
             salary= line[21]
             if(salary==''):
                 if(line[22]=='Free Agency' or line[22]=='Traded' or line[22]=='Amateur Free Agent' or 
-                    line[22]=='Waivers'):
+                    line[22]=='Waivers' or line[22]=='Purchased'):
                     salary='520000'
                 if(line[22]=='Amateur Draft'):
                     salary='543750'
