@@ -25,6 +25,10 @@ def parse_salary_data(salary_dict, salary_data):
             
             team= line[3]
             salary= line[21]
+            if(salary==''):
+                if(line[22]=='Free Agency' or line[22]=='Traded' or line[22]=='Amateur Free Agent'):
+                    salary='520000'
+            
             team_dict={}
             team_dict[team]=salary
             
@@ -35,7 +39,7 @@ def parse_salary_data(salary_dict, salary_data):
                 ''' add them to the dictionary'''
                 # print(salary_dict)
                 salary_dict[player_name]=team_dict
-
+    
             # print(player_name)
 
 def parse_pitcher_data(pitcher_dict, pitcher_data):
@@ -71,7 +75,7 @@ if __name__ == "__main__":
     salary_data_dict['player']['team'] = 'stats'
     #print(salary_data_dict)
 
-    (salary_data_dict, 
+    parse_salary_data(salary_data_dict, 
                 "/Users/karthiksuresh/Documents/GitHub/MLB-Player-Valuations/2017_MLB_Player_Salary_Info.md")
 
     for player in salary_data_dict:
@@ -80,14 +84,14 @@ if __name__ == "__main__":
                 print(player+': '+salary_data_dict[player][team])
             else:
                 print(player+' has no salary!')
-            # print(salary_data_dict[player])
+    #         print(salary_data_dict[player])
     # print(salary_data_dict)
     
     
     pitcher_data = {}
     parse_pitcher_data(pitcher_data, "2017_MLB_Pitcher_Info.md")
-    for p in pitcher_data:
-        for team in pitcher_data[p]:
-            print(p, team, pitcher_data[p][team].wins)
+    # for p in pitcher_data:
+    #     for team in pitcher_data[p]:
+    #         print(p, team, pitcher_data[p][team].wins)
     
     
