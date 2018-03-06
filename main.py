@@ -42,13 +42,18 @@ def parse_pitcher_data(pitcher_dict, pitcher_data):
     
     with open(pitcher_data) as data:
         
+        firstline = True
         for line in data:
+            if firstline:
+                firstline = False
+                continue
             line = line.strip().split(",")
             
             playername = line[1].strip().split(" ")
             name = ""
             for i in range(len(playername)-1):
                 name += (" " + playername[i])
+            name = name.strip()
             
             p = Pitcher(name, line[2],line[3], line[4])
             p.set_wl(line[5],line[6],line[7])
@@ -71,8 +76,7 @@ if __name__ == "__main__":
     salary_data_dict['player']['team'] = 'stats'
     #print(salary_data_dict)
 
-    (salary_data_dict, 
-                "/Users/karthiksuresh/Documents/GitHub/MLB-Player-Valuations/2017_MLB_Player_Salary_Info.md")
+    parse_salary_data(salary_data_dict,"2017_MLB_Player_Salary_Info.md")
 
     for player in salary_data_dict:
         for team in salary_data_dict[player]:
@@ -88,6 +92,16 @@ if __name__ == "__main__":
     parse_pitcher_data(pitcher_data, "2017_MLB_Pitcher_Info.md")
     for p in pitcher_data:
         for team in pitcher_data[p]:
-            print(p, team, pitcher_data[p][team].wins)
+            print(p, team, pitcher_data[p][team].w_l, pitcher_data[p][team].so)
+            
+            
+    strikeouts  = {}
+    for p in pitcher_data:
+        pdict = {}
+        for team in pitcher_data[p]:
+            if team in salary_data_dict[p]:
+                pdict[team] = (pitcher_data[p][team].so, salary_data_dict[p][team])
+                print(p)
+                print(p, pdict[team])
     
     
