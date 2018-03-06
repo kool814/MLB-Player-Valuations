@@ -73,21 +73,7 @@ def parse_pitcher_data(pitcher_dict, pitcher_data):
                 team_dict[team] = p
                 pitcher_dict[name] = team_dict
 
-def calc_fip(pitcher_data, salary_data_dict):
-    #pitcher_data = { Pitcher name ,{ Team name , Pitching data}}
-    #salary_data_dict = { Pitcher name  , { Team name ,  salary} }
-    #fip_dict = {  Pitcher name , FIP }; we will have multiple entries with same Pitcher name
-    #fip_dict = { Pithcer name, Salary };  we will have multiple entries with same Pitcher name
-    fip_dict = {}
-    salary_dict = {}
-
-    print(salary_data_dict)
-    #make salary_dict first
-    for player in salary_data_dict:
-        for salary in player:
-            print(salary)
-
-
+            
 
 
 
@@ -112,7 +98,6 @@ if __name__ == "__main__":
     
     pitcher_data = {}
     parse_pitcher_data(pitcher_data, "2017_MLB_Pitcher_Info.md")
-
     for p in pitcher_data:
         for team in pitcher_data[p]:
             print(p, team, pitcher_data[p][team].w_l, pitcher_data[p][team].so)
@@ -125,11 +110,5 @@ if __name__ == "__main__":
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
                 pdict[team] = (pitcher_data[p][team].so, salary_data_dict[p][team])
                 print(p, pdict[team])
-
     
-    # for p in pitcher_data:
-    #     for team in pitcher_data[p]:
-    #         print(p, team, pitcher_data[p][team].wins)
-    
-    calc_fip(pitcher_data, salary_data_dict)
     
