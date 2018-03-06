@@ -99,9 +99,8 @@ if __name__ == "__main__":
     for p in pitcher_data:
         pdict = {}
         for team in pitcher_data[p]:
-            if team in salary_data_dict[p]:
+            if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
                 pdict[team] = (pitcher_data[p][team].so, salary_data_dict[p][team])
-                print(p)
                 print(p, pdict[team])
     
     
