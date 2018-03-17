@@ -86,21 +86,21 @@ if __name__ == "__main__":
     parse_salary_data(salary_data_dict,"2017_MLB_Player_Salary_Info.md")
 
 
-    for player in salary_data_dict:
-        for team in salary_data_dict[player]:
-            if(salary_data_dict[player][team]!=''):
-                print(player+': '+salary_data_dict[player][team])
-            else:
-                print(player+' has no salary!')
+    # for player in salary_data_dict:
+    #     for team in salary_data_dict[player]:
+    #         if(salary_data_dict[player][team]!=''):
+    #             print(player+': '+salary_data_dict[player][team])
+    #         else:
+    #             print(player+' has no salary!')
     #         print(salary_data_dict[player])
     # print(salary_data_dict)
     
     
     pitcher_data = {}
     parse_pitcher_data(pitcher_data, "2017_MLB_Pitcher_Info.md")
-    for p in pitcher_data:
-        for team in pitcher_data[p]:
-            print(p, team, pitcher_data[p][team].w_l, pitcher_data[p][team].so)
+    # for p in pitcher_data:
+    #     for team in pitcher_data[p]:
+    #         print(p, team, pitcher_data[p][team].w_l, pitcher_data[p][team].so)
             
             
     strikeouts  = {}
@@ -109,6 +109,6 @@ if __name__ == "__main__":
         for team in pitcher_data[p]:
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
                 pdict[team] = (pitcher_data[p][team].so, salary_data_dict[p][team])
-                print(p, pdict[team])
+                print(p, pdict[team]) 
     
     
