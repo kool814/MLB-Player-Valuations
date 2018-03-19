@@ -3,7 +3,13 @@
 #Dictionary with key: Player and value: Dictionary containing key:Team and value: stats 
 
 import math
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets, linear_model
+from sklearn.linear_model import LinearRegression
+# import pandas as pd
 from Pitcher import *
+
 
 def parse_salary_data(salary_dict, salary_data):
     '''
@@ -103,12 +109,26 @@ if __name__ == "__main__":
     #         print(p, team, pitcher_data[p][team].w_l, pitcher_data[p][team].so)
             
             
-    strikeouts  = {}
+    strikeouts  = []
+    pdict = []
     for p in pitcher_data:
-        pdict = {}
         for team in pitcher_data[p]:
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
-                pdict[team] = (pitcher_data[p][team].so, salary_data_dict[p][team])
-                print(p, pdict[team]) 
+                pdict.append(int(salary_data_dict[p][team]))
+                strikeouts.append(int(pitcher_data[p][team].so))
+                # print(p, pdict[team], strikeouts[team]) 
+
+    x = [1,2,3,4]
+    y = [3,5,7,10] # 10, not 9, so the fit isn't perfect
+
+    fit = np.polyfit(strikeouts, pdict ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+
+    plt.plot(strikeouts,pdict,'yo', strikeouts, fit_fn(strikeouts), '--k')
+    plt.xlim(0, max(strikeouts)+10)
+    plt.ylim(0, max(pdict)*1.1)
+    plt.show()
+
     
     
