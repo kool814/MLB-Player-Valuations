@@ -118,9 +118,6 @@ if __name__ == "__main__":
                 strikeouts.append(int(pitcher_data[p][team].so))
                 # print(p, pdict[team], strikeouts[team]) 
 
-    x = [1,2,3,4]
-    y = [3,5,7,10] # 10, not 9, so the fit isn't perfect
-
     fit = np.polyfit(strikeouts, pdict ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
