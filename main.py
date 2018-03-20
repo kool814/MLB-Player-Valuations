@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets, linear_model
 from sklearn.linear_model import LinearRegression
+from scipy.stats import linregress
 # import pandas as pd
 from Pitcher import *
 
@@ -110,22 +111,24 @@ if __name__ == "__main__":
             
             
     strikeouts  = []
-    pdict = []
+    salary_data = []
     for p in pitcher_data:
         for team in pitcher_data[p]:
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
-                pdict.append(int(salary_data_dict[p][team]))
+                salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
-                # print(p, pdict[team], strikeouts[team]) 
+                # print(p, salary_data[team], strikeouts[team]) 
 
-    fit = np.polyfit(strikeouts, pdict ,1)
+    fit = np.polyfit(strikeouts, salary_data ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
 
-    plt.plot(strikeouts,pdict,'yo', strikeouts, fit_fn(strikeouts), '--k')
+    plt.plot(strikeouts,salary_data,'yo', strikeouts, fit_fn(strikeouts), '--k')
     plt.xlim(0, max(strikeouts)+10)
-    plt.ylim(0, max(pdict)*1.1)
+    plt.ylim(0, max(salary_data)*1.1)
     plt.show()
+
+    print(linregress(strikeouts,salary_data))
 
     
     
