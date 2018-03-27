@@ -30,7 +30,12 @@ class BatterInfo:
         self.sac_bunt = stats[26]
         self.sac_fly = stats[27]
         self.ibb = stats[28]
-        self.summary = stats[29]
+        self.pos_sum = stats[29]
+        self.pos = ''
+        
+        if stats[29] != '':
+            self.pos = stats[29].replace("/", "").replace("*","")[0]
+            
         self.statList = stats
     
     def __str__(self):
@@ -58,19 +63,60 @@ def createDict(data):
             
     return allStats
             
-
-f = open("2017_MLB_Batter_Info.md")
-data = []
-f.readline()
-for line in f:
-    data.append(line.strip().split(','))
+            
+def calculateWAR(batter, lgAvg):
+    """
+    Wins Above Replacement (meaning if they were replaced by an average player)
+    WAR = (Runs + Positional Adjustment + League Avg Adjustment +Replacement Runs) / (Runs Per Win)
     
-f.close()
+    Pos. Adj = ((At Bats/9) / 162) * (pos. specific run value)
+    
+    League Avg Adjustment = ((-1)*(Runs + lgPositional Adjustment) / lgPA)*PA
+    
+    Runs Per Win = 9*(MLB Runs Scored / At Bats)*1.5 + 3
+    
+2. Catcher: +12.5 runs (all are per 162 defensive games)
+3. First Base: -12.5 runs
+4. Second Base: +2.5 runs
+5. Third Base: +2.5 runs
+6. Shortstop: +7.5 runs
+7. Left Field: -7.5 runs
+8. Center Field: +2.5 runs
+9. Right Field: -7.5 runs
+D. Designated Hitter: -17.5 runs
 
-statDict = createDict(data)
-
-
-
+    
+    
+    """
+    pos_specific = {'2': 12.5, '3': -12.5, '4': 2.5, '5': 2.5,\
+                    '6': 7.5, '7': -7.5, '8': 2.5, '9': -7.5, 'D': -17.5}
+    
+    pos_adj = ((int(batter.ab)/9.0)/162.0) * pos_specific[batter.pos]
+    # league average batter has been passed into this function already
+    # we can access it like a regular batter
+    
+    lg_adj = ((-1)*(int(lgAvg.runs)) / int(lgAvg.pa))*int(batter.pa)
+    
+    WAR = (int(batter.runs) + pos_adj + lg_adj)
+    return WAR
+    
+if __name__ == "__main__":
+    f = open("2017_MLB_Batter_Info.md")
+    data = []
+    f.readline()
+    for line in f:
+        if line.strip().split(',')[-1] != '' :
+            if '1' not in line.strip().split(',')[-1]:
+                data.append(line.strip().split(','))
+        elif "LgAvg" in line.strip().split(',')[1]:
+            lgAvg = BatterInfo(line.strip().split(','))
+            #print(lgAvg)
+    f.close()
+    statDict = createDict(data)
+    for player in statDict:
+        for team in statDict[player]:
+            print("{:.2f}".format(calculateWAR(statDict[player][team], lgAvg)))
+            
 
 """
 Rk = rank
