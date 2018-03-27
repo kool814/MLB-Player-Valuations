@@ -71,7 +71,7 @@ def calculateWAR(batter, lgAvg):
     
     Pos. Adj = ((At Bats/9) / 162) * (pos. specific run value)
     
-    League Avg Adjustment = ((-1)*(lgBatting Runs + lgBase Running Runs + lgFielding Runs + lgPositional Adjustment) / lgPA)*PA
+    League Avg Adjustment = ((-1)*(Runs + lgPositional Adjustment) / lgPA)*PA
     
     Runs Per Win = 9*(MLB Runs Scored / At Bats)*1.5 + 3
     
@@ -91,11 +91,14 @@ D. Designated Hitter: -17.5 runs
     pos_specific = {'2': 12.5, '3': -12.5, '4': 2.5, '5': 2.5,\
                     '6': 7.5, '7': -7.5, '8': 2.5, '9': -7.5, 'D': -17.5}
     
-    pos_adj = ((batter.ab/9.0)/162.0) * pos_specific[batter.pos]
-    #lg_adj = 
+    pos_adj = ((int(batter.ab)/9.0)/162.0) * pos_specific[batter.pos]
+    # league average batter has been passed into this function already
+    # we can access it like a regular batter
     
-    ##WAR = batter.runs
+    lg_adj = ((-1)*(int(lgAvg.runs)) / int(lgAvg.pa))*int(batter.pa)
     
+    WAR = (int(batter.runs) + pos_adj + lg_adj)
+    return WAR
     
 if __name__ == "__main__":
     f = open("2017_MLB_Batter_Info.md")
@@ -107,11 +110,13 @@ if __name__ == "__main__":
                 data.append(line.strip().split(','))
         elif "LgAvg" in line.strip().split(',')[1]:
             lgAvg = BatterInfo(line.strip().split(','))
-            print(lgAvg)
+            #print(lgAvg)
     f.close()
-    
     statDict = createDict(data)
-    
+    for player in statDict:
+        for team in statDict[player]:
+            print("{:.2f}".format(calculateWAR(statDict[player][team], lgAvg)))
+            
 
 """
 Rk = rank
