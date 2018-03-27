@@ -10,6 +10,7 @@ from sklearn.linear_model import LinearRegression
 from scipy.stats import linregress
 # import pandas as pd
 from Pitcher import *
+from BatterParse import *
 
 
 def parse_salary_data(salary_dict, salary_data):
@@ -130,5 +131,26 @@ if __name__ == "__main__":
 
     print(linregress(strikeouts,salary_data))
 
-    
-    
+    noData = 0
+    batterSalaries = []
+    WAR = []
+    batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
+    for b in batterDict:
+        for team in batterDict[b]:
+            if b in salary_data_dict and team in salary_data_dict[b]:
+                WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
+                batterSalaries.append(salary_data_dict[b][team])
+            else:
+                noData += 1
+                print(b,team, " has no salary data", noData)
+                if b in salary_data_dict:
+                    print('\t', salary_data_dict[b], batterDict[b])
+    print(batterDict)
+    """
+    issue I noticed: players with multiple teams were listed twice in the batter data,
+     but they were just given "2TM", "3TM", etc in salary data
+    idea: for multiple teams in batter parse, only keep the one with highest WAR
+    53 players had this issue
+
+    for next week: solve issue, plot the stats above
+    """
