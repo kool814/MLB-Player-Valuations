@@ -162,3 +162,29 @@ if __name__ == "__main__":
     plt.show()    
 
     print("\nLoss vs. Salary: ", linregress(losses,salary_winslosses),"\n")
+
+
+    homeruns  = []
+    # salary_data = []
+    for p in pitcher_data:
+        for team in pitcher_data[p]:
+            if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
+                # salary_data.append(int(salary_data_dict[p][team]))
+                homeruns.append(int(pitcher_data[p][team].so))
+                # print(p, salary_data[team], strikeouts[team]) 
+                
+    plt.figure(4)
+    fit = np.polyfit(homeruns, salary_data ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+
+    plt.plot(homeruns,salary_data,'yo', homeruns, fit_fn(homeruns), '--k')
+    plt.xlim(0, max(strikeouts)+10)
+    plt.ylim(0, max(salary_data)*1.1)
+    plt.title('Home Runs vs. Salary')
+    plt.xlabel('Home Runs')
+    plt.ylabel('Salary (Million per year)')
+
+    plt.show()
+
+    print("\nHome Runs vs. Salary: ", linregress(strikeouts,salary_data),"\n")
