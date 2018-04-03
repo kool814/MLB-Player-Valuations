@@ -127,9 +127,13 @@ if __name__ == "__main__":
     plt.plot(strikeouts,salary_data,'yo', strikeouts, fit_fn(strikeouts), '--k')
     plt.xlim(0, max(strikeouts)+10)
     plt.ylim(0, max(salary_data)*1.1)
+    plt.title('Strikeouts vs. Salary')
+    plt.xlabel('Strikeouts')
+    plt.ylabel('Salary (Million per year)')
+
     plt.show()
 
-    print(linregress(strikeouts,salary_data))
+    print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
 
     
     wins  = []
