@@ -139,7 +139,7 @@ if __name__ == "__main__":
     wins  = []
     salary_winslosses = []
     losses = []
-    salary_losses = []
+    # salary_losses = []
     for p in pitcher_data:
         for team in pitcher_data[p]:
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
@@ -153,10 +153,12 @@ if __name__ == "__main__":
     plt.xlim(0, max(wins)+10)
     plt.ylim(0, max(salary_winslosses)*1.1)
     plt.show()
-    
+    print("\nWins vs. Salary: ", linregress(wins,salary_winslosses),"\n")
     
     plt.figure(3)         
     plt.plot(losses,salary_winslosses,'yo', wins, fit_fn(losses), '--k')
     plt.xlim(0, max(losses)+10)
     plt.ylim(0, max(salary_winslosses)*1.1)
     plt.show()    
+
+    print("\nLoss vs. Salary: ", linregress(losses,salary_winslosses),"\n")
