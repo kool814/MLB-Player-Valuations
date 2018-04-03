@@ -118,7 +118,8 @@ if __name__ == "__main__":
                 salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
                 # print(p, salary_data[team], strikeouts[team]) 
-
+                
+    plt.figure(1)
     fit = np.polyfit(strikeouts, salary_data ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
@@ -131,4 +132,27 @@ if __name__ == "__main__":
     print(linregress(strikeouts,salary_data))
 
     
+    wins  = []
+    salary_winslosses = []
+    losses = []
+    salary_losses = []
+    for p in pitcher_data:
+        for team in pitcher_data[p]:
+            if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
+                salary_winslosses.append(int(salary_data_dict[p][team]))
+                wins.append(int(pitcher_data[p][team].wins))
+                losses.append(int(pitcher_data[p][team].losses))
     
+    
+    plt.figure(2)          
+    plt.plot(wins,salary_winslosses,'yo', wins, fit_fn(wins), '--k')
+    plt.xlim(0, max(wins)+10)
+    plt.ylim(0, max(salary_winslosses)*1.1)
+    plt.show()
+    
+    
+    plt.figure(3)         
+    plt.plot(losses,salary_winslosses,'yo', wins, fit_fn(losses), '--k')
+    plt.xlim(0, max(losses)+10)
+    plt.ylim(0, max(salary_winslosses)*1.1)
+    plt.show()    
