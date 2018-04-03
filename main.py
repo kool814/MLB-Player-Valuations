@@ -136,20 +136,46 @@ if __name__ == "__main__":
     WAR = []
     batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
     for b in batterDict:
-        for team in batterDict[b]:
-            if b in salary_data_dict and team in salary_data_dict[b]:
-                WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
-                batterSalaries.append(salary_data_dict[b][team])
-            else:
-                noData += 1
-                print(b,team, " has no salary data", noData)
-                if b in salary_data_dict:
-                    print('\t', salary_data_dict[b], batterDict[b])
+        if "2TM" in batterDict[b]:
+            WAR.append(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))
+            for t in salary_data_dict[b]:
+                batterSalaries.append(salary_data_dict[b][t])
+                break          
+        elif "3TM" in batterDict[b]:
+            WAR.append(calculateWAR(batterDict[b]["3TM"], lgBatterAvg))
+            for t in salary_data_dict[b]:
+                batterSalaries.append(salary_data_dict[b][t])
+                break 
+        else:
+            pass
+        
+        ## below here will not work
+        if b in salary_data_dict and team in salary_data_dict[b]:
+            WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
+            batterSalaries.append(salary_data_dict[b][team])
+        elif "2TM" in salary_data_dict[b]:
+            noData += 1
+            print(b,team, " has no salary data", noData)
+            if b in salary_data_dict:
+                print('\t', salary_data_dict[b], batterDict[b])
     print(batterDict)
+    """
+    fit = np.polyfit(WAR, salary_data ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+
+    plt.plot(WAR,salary_data,'yo', WAR, fit_fn(WAR), '--k')
+    plt.xlim(0, max(WAR)+10)
+    plt.ylim(0, max(salary_data)*1.1)
+    plt.show()
+
+    print(linregress(WAR,salary_data))
+    """
+    
     """
     issue I noticed: players with multiple teams were listed twice in the batter data,
      but they were just given "2TM", "3TM", etc in salary data
-    idea: for multiple teams in batter parse, only keep the one with highest WAR
+    idea: for multiple teams in batter parse, keep separate the one with highest Games Played
     53 players had this issue
 
     for next week: solve issue, plot the stats above

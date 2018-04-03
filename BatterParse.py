@@ -52,15 +52,26 @@ def createDict(data):
             allStats[tempBatter.name][tempBatter.team] = tempBatter
         else:
             # add the new team
-            if tempBatter.team in allStats[tempBatter.name]:
+            if tempBatter.team in allStats[tempBatter.name]:  
                 # add the one with a higher gp
                 if int(allStats[tempBatter.name][tempBatter.team].g) < int(tempBatter.g):
                     allStats[tempBatter.name][tempBatter.team] = tempBatter                    
                     
             else:
-                allStats[tempBatter.name] = dict()
                 allStats[tempBatter.name][tempBatter.team] = tempBatter
-            
+
+    for batter in allStats:
+        if len(allStats[batter]) > 1: # if there is more than one team, make a xTM stat
+            numTeams = len(allStats[batter])
+            mostGP = ""
+            for team in allStats[batter]:
+                if mostGP == "" or allStats[batter][mostGP].g < allStats[batter][team].g:
+                    mostGP = team
+            #print(batter, mostGP, numTeams)
+            allStats[batter]["2TM"] = allStats[batter][mostGP]
+        #else:
+            #print(batter, allStats[batter])
+    
     return allStats
             
             
@@ -107,7 +118,7 @@ def parseBatterData(fileName):
     f.readline()
     for line in f:
         if line.strip().split(',')[-1] != '' :
-            if '1' not in line.strip().split(',')[-1]:
+            if '1' not in line.strip().split(',')[-1]: # exclude pitchers from the data
                 data.append(line.strip().split(','))
         elif "LgAvg" in line.strip().split(',')[1]:
             lgAvg = BatterInfo(line.strip().split(','))
@@ -135,7 +146,7 @@ if __name__ == "__main__":
     
     for player in statDict:
         for team in statDict[player]:
-            print("{:.2f}".format(calculateWAR(statDict[player][team], lgAvg)))
+            pass#print("{:.2f}".format(calculateWAR(statDict[player][team], lgAvg)))
             
     
     """
