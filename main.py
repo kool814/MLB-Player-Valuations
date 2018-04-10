@@ -195,7 +195,7 @@ print("\nIP vs. Salary: ", linregress(ip,era_salary),"\n")
 
 plt.figure(6)         
 plt.plot(whip,era_salary,'yo', whip, fit_fn(whip), '--k')
-plt.xlim(0, max(era)+10)
+plt.xlim(0, max(whip)+1)
 plt.ylim(0, max(era_salary)*1.1)
 plt.show()    
 
