@@ -4,7 +4,10 @@ h1 {
 	border-style: solid;
 	border-radius: 20px;
 	border-width: 8px;
-	background-color: cyan;
+	background-color: red;
 }
 
 
+body {
+	background-image: url("baseball2.jpg");
+}
