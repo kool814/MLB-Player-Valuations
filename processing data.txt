@@ -1,5 +1,6 @@
-Python dictionary
-key: Player Name
+Using Python dictionary to organize data:
+
+Key: Player Name
 Value: another dictionary
-	key: each team the player was on
-	value: a class containing that line of stats
+	Key: each team the player was on
+	Value: a class containing that line of stats
