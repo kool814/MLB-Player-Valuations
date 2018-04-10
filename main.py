@@ -119,7 +119,7 @@ if __name__ == "__main__":
                 salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
                 # print(p, salary_data[team], strikeouts[team]) 
-
+            """
     fit = np.polyfit(strikeouts, salary_data ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
@@ -130,53 +130,57 @@ if __name__ == "__main__":
     plt.show()
 
     print(linregress(strikeouts,salary_data))
-
-    noData = 0
+"""
     batterSalaries = []
     WAR = []
     batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
     for b in batterDict:
+        if b not in batterDict or b not in salary_data_dict:
+            continue
         if "2TM" in batterDict[b]:
-            WAR.append(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))
+            
             for t in salary_data_dict[b]:
-                batterSalaries.append(salary_data_dict[b][t])
-                break          
+                if salary_data_dict[b][t].isdigit():
+                    batterSalaries.append(int(salary_data_dict[b][t]))
+                    WAR.append(int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg)))
+                break              
+                
+                   
         elif "3TM" in batterDict[b]:
-            WAR.append(calculateWAR(batterDict[b]["3TM"], lgBatterAvg))
             for t in salary_data_dict[b]:
-                batterSalaries.append(salary_data_dict[b][t])
+                if salary_data_dict[b][t].isdigit():
+                    batterSalaries.append(int(salary_data_dict[b][t]))
+                    WAR.append(calculateWAR(batterDict[b]["3TM"], lgBatterAvg))
                 break 
         else:
-            pass
+            for t in salary_data_dict[b]:
+                if salary_data_dict[b][t].isdigit():
+                    batterSalaries.append(int(salary_data_dict[b][t]))
+                    for t1 in batterDict[b]:
+                        WAR.append(calculateWAR(batterDict[b][t1], lgBatterAvg))
+                        break
+                break             
         
         ## below here will not work
-        if b in salary_data_dict and team in salary_data_dict[b]:
-            WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
-            batterSalaries.append(salary_data_dict[b][team])
-        elif "2TM" in salary_data_dict[b]:
-            noData += 1
-            print(b,team, " has no salary data", noData)
-            if b in salary_data_dict:
-                print('\t', salary_data_dict[b], batterDict[b])
-    print(batterDict)
-    """
-    fit = np.polyfit(WAR, salary_data ,1)
+        #if b in salary_data_dict and team in salary_data_dict[b]:
+            #WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
+            #batterSalaries.append(salary_data_dict[b][team])
+        #elif "2TM" in salary_data_dict[b]:
+            #noData += 1
+            #print(b,team, " has no salary data", noData)
+            #if b in salary_data_dict:
+                #print('\t', salary_data_dict[b], batterDict[b])
+
+    fit = np.polyfit(WAR, batterSalaries ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
 
-    plt.plot(WAR,salary_data,'yo', WAR, fit_fn(WAR), '--k')
+    plt.plot(WAR,batterSalaries,'yo', WAR, fit_fn(WAR), '--k')
     plt.xlim(0, max(WAR)+10)
     plt.ylim(0, max(salary_data)*1.1)
     plt.show()
 
-    print(linregress(WAR,salary_data))
-    """
+    print(linregress(WAR,batterSalaries))
     
-    """
-    issue I noticed: players with multiple teams were listed twice in the batter data,
-     but they were just given "2TM", "3TM", etc in salary data
-    idea: for multiple teams in batter parse, keep separate the one with highest Games Played
-    53 players had this issue
-
-    for next week: solve issue, plot the stats above
-    """
+    
+  
