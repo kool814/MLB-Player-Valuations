@@ -119,11 +119,12 @@ if __name__ == "__main__":
                 salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
                 # print(p, salary_data[team], strikeouts[team]) 
-            """
+
     fit = np.polyfit(strikeouts, salary_data ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
-
+    """
+    plt.figure(1)
     plt.plot(strikeouts,salary_data,'yo', strikeouts, fit_fn(strikeouts), '--k')
     plt.xlim(0, max(strikeouts)+10)
     plt.ylim(0, max(salary_data)*1.1)
@@ -133,6 +134,8 @@ if __name__ == "__main__":
 """
     batterSalaries = []
     WAR = []
+    RC = []
+    hits = []
     batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
     for b in batterDict:
         if b not in batterDict or b not in salary_data_dict:
@@ -140,24 +143,37 @@ if __name__ == "__main__":
         if "2TM" in batterDict[b]:
             
             for t in salary_data_dict[b]:
-                if salary_data_dict[b][t].isdigit():
+                if salary_data_dict[b][t].isdigit()\
+                   and calculateRC(batterDict[b]["2TM"]) != -1:
+                    
                     batterSalaries.append(int(salary_data_dict[b][t]))
                     WAR.append(int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg)))
+                    RC.append(int(calculateRC(batterDict[b]["2TM"])))
+                    hits.append(int(batterDict[b]["2TM"].hits))
                 break              
                 
                    
         elif "3TM" in batterDict[b]:
             for t in salary_data_dict[b]:
-                if salary_data_dict[b][t].isdigit():
+                if salary_data_dict[b][t].isdigit() \
+                   and calculateRC(batterDict[b]["3TM"]) != -1:
+                    
                     batterSalaries.append(int(salary_data_dict[b][t]))
                     WAR.append(calculateWAR(batterDict[b]["3TM"], lgBatterAvg))
+                    RC.append(calculateRC(calculateRC(batterDict[b]["3TM"])))
+                    hits.append(int(batterDict[b]["3TM"].hits))
                 break 
         else:
             for t in salary_data_dict[b]:
                 if salary_data_dict[b][t].isdigit():
-                    batterSalaries.append(int(salary_data_dict[b][t]))
                     for t1 in batterDict[b]:
-                        WAR.append(calculateWAR(batterDict[b][t1], lgBatterAvg))
+                        if  calculateRC(batterDict[b][t1]) != -1:
+                        
+                            batterSalaries.append(int(salary_data_dict[b][t]))
+                            WAR.append(calculateWAR(batterDict[b][t1], lgBatterAvg))
+                            RC.append(calculateRC(batterDict[b][t1]))
+                            hits.append(int(batterDict[b][t1].hits))
+                            
                         break
                 break             
         
@@ -174,13 +190,30 @@ if __name__ == "__main__":
     fit = np.polyfit(WAR, batterSalaries ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
-
-    plt.plot(WAR,batterSalaries,'yo', WAR, fit_fn(WAR), '--k')
+    plt.figure(8)
+    plt.plot(WAR,batterSalaries,'ro', WAR, fit_fn(WAR), '--k')
     plt.xlim(0, max(WAR)+10)
-    plt.ylim(0, max(salary_data)*1.1)
+    plt.ylim(0, max(batterSalaries)*1.1)
     plt.show()
 
     print(linregress(WAR,batterSalaries))
     
+    fit = np.polyfit(RC, batterSalaries ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+    plt.figure(9)
+    plt.plot(RC,batterSalaries,'go', RC, fit_fn(RC), '--k')
+    plt.xlim(0, max(RC)+10)
+    plt.ylim(0, max(batterSalaries)*1.1)
+    plt.show()
+
+    print(linregress(RC,batterSalaries))       
     
-  
+    
+    plt.figure(10)
+    plt.plot(hits,batterSalaries,'bo', hits, fit_fn(hits), '--k')
+    plt.xlim(0, max(hits)+10)
+    plt.ylim(0, max(batterSalaries)*1.1)
+    plt.show()
+
+    print(linregress(hits,batterSalaries))     

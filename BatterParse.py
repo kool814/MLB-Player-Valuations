@@ -78,9 +78,11 @@ def calculateRC(batter):
     """
     RC = (hits + walk) * tot_bases / (ab + walk)
     """
-    RC = (int(batter.hits) + int(batter.walk)) * int(batter.tot_bases) \
+    if (int(batter.ab) + int(batter.walk)) != 0:
+        RC = (int(batter.hits) + int(batter.walk)) * int(batter.tot_bases) \
         /(int(batter.ab) + int(batter.walk))
-    
+    else:
+        RC = -1
     return RC
     
 
