@@ -81,36 +81,17 @@ def parse_pitcher_data(pitcher_dict, pitcher_data):
                 team_dict[team] = p
                 pitcher_dict[name] = team_dict
 
-            
-
-
 
 if __name__ == "__main__":
     salary_data_dict = {}
     salary_data_dict['player'] = {}
     salary_data_dict['player']['team'] = 'stats'
-    #print(salary_data_dict)
 
     parse_salary_data(salary_data_dict,"2017_MLB_Player_Salary_Info.md")
 
-
-    # for player in salary_data_dict:
-    #     for team in salary_data_dict[player]:
-    #         if(salary_data_dict[player][team]!=''):
-    #             print(player+': '+salary_data_dict[player][team])
-    #         else:
-    #             print(player+' has no salary!')
-    #         print(salary_data_dict[player])
-    # print(salary_data_dict)
-    
-    
     pitcher_data = {}
     parse_pitcher_data(pitcher_data, "2017_MLB_Pitcher_Info.md")
-    # for p in pitcher_data:
-    #     for team in pitcher_data[p]:
-    #         print(p, team, pitcher_data[p][team].w_l, pitcher_data[p][team].so)
-            
-            
+    
     strikeouts  = []
     salary_data = []
     for p in pitcher_data:
@@ -118,7 +99,6 @@ if __name__ == "__main__":
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
                 salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
-                # print(p, salary_data[team], strikeouts[team]) 
                 
     plt.figure(1)
     fit = np.polyfit(strikeouts, salary_data ,1)
