@@ -2,7 +2,7 @@
 class BatterInfo:
     def __init__(self, stats):
         self.rank = stats[0]
-        self.name = stats[1]
+        self.name = stats[1].split('\\')[0].strip()
         self.age = stats[2]
         self.team = stats[3]
         self.league = stats[4]
@@ -52,17 +52,40 @@ def createDict(data):
             allStats[tempBatter.name][tempBatter.team] = tempBatter
         else:
             # add the new team
-            if tempBatter.team in allStats[tempBatter.name]:
+            if tempBatter.team in allStats[tempBatter.name]:  
                 # add the one with a higher gp
                 if int(allStats[tempBatter.name][tempBatter.team].g) < int(tempBatter.g):
                     allStats[tempBatter.name][tempBatter.team] = tempBatter                    
                     
             else:
-                allStats[tempBatter.name] = dict()
                 allStats[tempBatter.name][tempBatter.team] = tempBatter
-            
+
+    for batter in allStats:
+        if len(allStats[batter]) > 1: # if there is more than one team, make a xTM stat
+            numTeams = len(allStats[batter])
+            mostGP = ""
+            for team in allStats[batter]:
+                if mostGP == "" or allStats[batter][mostGP].g < allStats[batter][team].g:
+                    mostGP = team
+            #print(batter, mostGP, numTeams)
+            allStats[batter]["2TM"] = allStats[batter][mostGP]
+        #else:
+            #print(batter, allStats[batter])
+    
     return allStats
             
+def calculateRC(batter):
+    """
+    RC = (hits + walk) * tot_bases / (ab + walk)
+    """
+    if (int(batter.ab) + int(batter.walk)) != 0:
+        RC = (int(batter.hits) + int(batter.walk)) * int(batter.tot_bases) \
+        /(int(batter.ab) + int(batter.walk))
+    else:
+        RC = -1
+    return RC
+    
+
             
 def calculateWAR(batter, lgAvg):
     """
@@ -100,7 +123,24 @@ D. Designated Hitter: -17.5 runs
     WAR = (int(batter.runs) + pos_adj + lg_adj)
     return WAR
     
+    
+def parseBatterData(fileName):
+    f = open("2017_MLB_Batter_Info.md")
+    data = []
+    f.readline()
+    for line in f:
+        if line.strip().split(',')[-1] != '' :
+            if '1' not in line.strip().split(',')[-1]: # exclude pitchers from the data
+                data.append(line.strip().split(','))
+        elif "LgAvg" in line.strip().split(',')[1]:
+            lgAvg = BatterInfo(line.strip().split(','))
+            #print(lgAvg)
+    f.close()
+    statDict = createDict(data)
+    return statDict,lgAvg
+
 if __name__ == "__main__":
+    """
     f = open("2017_MLB_Batter_Info.md")
     data = []
     f.readline()
@@ -113,40 +153,43 @@ if __name__ == "__main__":
             #print(lgAvg)
     f.close()
     statDict = createDict(data)
+    """
+    statDict, lgAvg = parseBatterData("2017_MLB_Batter_Info.md")
+    
     for player in statDict:
         for team in statDict[player]:
-            print("{:.2f}".format(calculateWAR(statDict[player][team], lgAvg)))
+            pass#print("{:.2f}".format(calculateWAR(statDict[player][team], lgAvg)))
             
-
-"""
-Rk = rank
-Name
-Age
-Tm = Team
-Lg = League
-G = Games Played
-PA = Plate Appearance
-AB = At-bat
-R = Runs
-H = Hits
-2B = Double
-3B = Triple
-HR = Home Run
-RBI = Runs Batted In
-SB = Stolen Base
-CS = Caught Stealing
-BB = Walk
-SO = Strikeout
-BA = Batting Average
-OBP = On-Base Percentage
-SLG = Slugging Percentage
-OPS = On Base Plus Slugging
-OPS+ = On Base Plus Slugging Plus
-TB = Total Bases
-GDP = Grounded Into Double Play
-HBP = Hit By Pitch
-SH = Sacrifice Bunt
-SF = Sacrifice Fly
-IBB = Intentional Walk
-Pos Summary 
-"""
+    
+    """
+    Rk = rank
+    Name
+    Age
+    Tm = Team
+    Lg = League
+    G = Games Played
+    PA = Plate Appearance
+    AB = At-bat
+    R = Runs
+    H = Hits
+    2B = Double
+    3B = Triple
+    HR = Home Run
+    RBI = Runs Batted In
+    SB = Stolen Base
+    CS = Caught Stealing
+    BB = Walk
+    SO = Strikeout
+    BA = Batting Average
+    OBP = On-Base Percentage
+    SLG = Slugging Percentage
+    OPS = On Base Plus Slugging
+    OPS+ = On Base Plus Slugging Plus
+    TB = Total Bases
+    GDP = Grounded Into Double Play
+    HBP = Hit By Pitch
+    SH = Sacrifice Bunt
+    SF = Sacrifice Fly
+    IBB = Intentional Walk
+    Pos Summary 
+    """
