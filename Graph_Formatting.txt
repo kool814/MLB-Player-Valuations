@@ -1,0 +1,23 @@
+How to format the Statistal Models/Plots: 
+
+1. Label the plot(1, 2, 15, etc. ): 
+    plt.figure(1)
+2. Create the line of best fit with the two data points that are being compared: 
+    fit = np.polyfit(strikeouts, salary_data ,1)
+3. Create the line of best fit function as a linear model:
+    fit_fn = np.poly1d(fit) 
+    (fit_fn is now a function which takes in x and returns an estimate for y)
+4. Plot the two data points and the line of best fit
+    plt.plot(strikeouts,salary_data,'yo', strikeouts, fit_fn(strikeouts), '--k')
+5. Set the interval size of the x and y-axis:
+    plt.xlim(0, max(strikeouts)+10)
+    plt.ylim(0, max(salary_data)*1.1)
+6. Label the graph:
+    plt.title('Strikeouts vs. Salary')
+7. Label the x and y-axis:
+    plt.xlabel('Strikeouts')
+    plt.ylabel('Salary (Million per year)')
+8. Display the plot:
+    plt.show()
+9. Label the graph:
+    print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")

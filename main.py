@@ -119,7 +119,8 @@ if __name__ == "__main__":
                 salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
                 # print(p, salary_data[team], strikeouts[team]) 
-
+                
+    plt.figure(1)
     fit = np.polyfit(strikeouts, salary_data ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
@@ -128,7 +129,9 @@ if __name__ == "__main__":
     plt.plot(strikeouts,salary_data,'yo', strikeouts, fit_fn(strikeouts), '--k')
     plt.xlim(0, max(strikeouts)+10)
     plt.ylim(0, max(salary_data)*1.1)
-    plt.show()
+    plt.title('Strikeouts vs. Salary')
+    plt.xlabel('Strikeouts')
+    plt.ylabel('Salary (Million per year)')
 
     print(linregress(strikeouts,salary_data))
 """
@@ -217,3 +220,143 @@ if __name__ == "__main__":
     plt.show()
 
     print(linregress(hits,batterSalaries))     
+    plt.show()
+
+    print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
+    
+    
+    era  = []
+    ip = []
+    whip = []
+    wins  = []
+    salary_winslosses = []
+    losses = []
+    for p in pitcher_data:
+        for team in pitcher_data[p]:
+            if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
+                salary_winslosses.append(int(salary_data_dict[p][team]))
+                wins.append(int(pitcher_data[p][team].wins))
+                losses.append(int(pitcher_data[p][team].losses))
+         
+    era_salary = []           
+    for p in pitcher_data:
+        for team in pitcher_data[p]:
+            if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':    
+                if pitcher_data[p][team].eraplus == '' or pitcher_data[p][team].whip == '':
+                    continue
+                era_salary.append(int(salary_data_dict[p][team]))
+                era.append(float(pitcher_data[p][team].eraplus))
+                ip.append(float(pitcher_data[p][team].ip))
+                whip.append(float(pitcher_data[p][team].whip))                
+    
+    
+    plt.figure(2)          
+    plt.plot(wins,salary_winslosses,'yo', wins, fit_fn(wins), '--k')
+    plt.xlim(0, max(wins)+10)
+    plt.ylim(0, max(salary_winslosses)*1.1)
+    plt.xlabel('Wins')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('Wins vs. Salary')
+    plt.show()
+    print("\nWins vs. Salary: ", linregress(wins,salary_winslosses),"\n")
+    
+    plt.figure(3)         
+    plt.plot(losses,salary_winslosses,'yo', losses, fit_fn(losses), '--k')
+    plt.xlim(0, max(losses)+10)
+    plt.ylim(0, max(salary_winslosses)*1.1)
+    plt.xlabel('Loss')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('Loss vs. Salary')
+    plt.show()    
+
+    print("\nLoss vs. Salary: ", linregress(losses,salary_winslosses),"\n")
+
+
+    plt.figure(4)         
+    plt.plot(era,era_salary,'yo', era, fit_fn(era), '--k')
+    plt.xlim(0, max(era)+10)
+    plt.ylim(0, max(era_salary)*1.1)
+    plt.xlabel('Era')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('Era vs. Salary')
+    plt.show()
+
+    print("\nEra vs. Salary: ", linregress(era,era_salary),"\n")
+
+    plt.figure(5)         
+    plt.plot(ip,era_salary,'yo', ip, fit_fn(ip), '--k')
+    plt.xlim(0, max(ip)+10)
+    plt.ylim(0, max(era_salary)*1.1)
+    plt.xlabel('IP')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('IP vs. Salary')
+    plt.show()    
+
+    print("\nIP vs. Salary: ", linregress(ip,era_salary),"\n")
+
+    plt.figure(6)         
+    plt.plot(whip,era_salary,'yo', whip, fit_fn(whip), '--k')
+    plt.xlim(0, max(whip)+1)
+    plt.ylim(0, max(era_salary)*1.1)
+    plt.xlabel('WHIP')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('WHIP vs. Salary')
+    plt.show()    
+
+    print("\nWHIP vs. Salary: ", linregress(whip,era_salary),"\n")    
+
+
+
+
+    homeruns  = []
+    # salary_data = []
+    for p in pitcher_data:
+        for team in pitcher_data[p]:
+            if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
+                # salary_data.append(int(salary_data_dict[p][team]))
+                homeruns.append(int(pitcher_data[p][team].so))
+                # print(p, salary_data[team], strikeouts[team]) 
+                
+
+    plt.figure(7)
+    fit = np.polyfit(homeruns, salary_data ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+
+    plt.plot(homeruns,salary_data,'yo', homeruns, fit_fn(homeruns), '--k')
+    plt.xlim(0, max(strikeouts)+10)
+    plt.ylim(0, max(salary_data)*1.1)
+    plt.title('Home Runs vs. Salary')
+    plt.xlabel('Home Runs')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('Home Runs vs. Salary')
+
+    plt.show()
+
+    print("\nHome Runs vs. Salary: ", linregress(strikeouts,salary_data),"\n")
+
+    # batteravg  = []
+    # for p in pitcher_data:
+    #     for team in pitcher_data[p]:
+    #         if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
+    #             batteravg.append(int(pitcher_data[p][team].so))
+                
+
+    # plt.figure(7)
+    # fit = np.polyfit(batteravg, salary_data ,1)
+    # fit_fn = np.poly1d(fit) 
+    # # fit_fn is now a function which takes in x and returns an estimate for y
+
+    # plt.plot(batteravg,salary_data,'yo', batteravg, fit_fn(batteravg), '--k')
+    # plt.xlim(0, max(batteravg)+10)
+    # plt.ylim(0, max(salary_data)*1.1)
+    # plt.title('Batter Avg. vs. Salary')
+    # plt.xlabel('Batter Avg.')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Batter Avg. vs. Salary')
+
+    # plt.show()
+
+    # print("\nBatter Avg. vs. Salary: ", linregress(batteravg,salary_data),"\n")
+
+
