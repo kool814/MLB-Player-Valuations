@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 from scipy.stats import linregress
 # import pandas as pd
 from Pitcher import *
-from BatterParse import *
+from Batter import *
 
 
 def parse_salary_data(salary_dict, salary_data):
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     fit = np.polyfit(strikeouts, salary_data ,1)
     fit_fn = np.poly1d(fit) 
     # fit_fn is now a function which takes in x and returns an estimate for y
-    """
+    
     plt.figure(1)
     plt.plot(strikeouts,salary_data,'yo', strikeouts, fit_fn(strikeouts), '--k')
     plt.xlim(0, max(strikeouts)+10)
@@ -134,96 +134,6 @@ if __name__ == "__main__":
     plt.ylabel('Salary (Million per year)')
 
     print(linregress(strikeouts,salary_data))
-"""
-    batterSalaries = []
-    WAR = []
-    RC = []
-    hits = []
-    batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
-    for b in batterDict:
-        if b not in batterDict or b not in salary_data_dict:
-            continue
-        if "2TM" in batterDict[b]:
-            
-            for t in salary_data_dict[b]:
-                if salary_data_dict[b][t].isdigit()\
-                   and calculateRC(batterDict[b]["2TM"]) != -1:
-                    
-                    batterSalaries.append(int(salary_data_dict[b][t]))
-                    WAR.append(int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg)))
-                    RC.append(int(calculateRC(batterDict[b]["2TM"])))
-                    hits.append(int(batterDict[b]["2TM"].hits))
-                break              
-                
-                   
-        elif "3TM" in batterDict[b]:
-            for t in salary_data_dict[b]:
-                if salary_data_dict[b][t].isdigit() \
-                   and calculateRC(batterDict[b]["3TM"]) != -1:
-                    
-                    batterSalaries.append(int(salary_data_dict[b][t]))
-                    WAR.append(calculateWAR(batterDict[b]["3TM"], lgBatterAvg))
-                    RC.append(calculateRC(calculateRC(batterDict[b]["3TM"])))
-                    hits.append(int(batterDict[b]["3TM"].hits))
-                break 
-        else:
-            for t in salary_data_dict[b]:
-                if salary_data_dict[b][t].isdigit():
-                    for t1 in batterDict[b]:
-                        if  calculateRC(batterDict[b][t1]) != -1:
-                        
-                            batterSalaries.append(int(salary_data_dict[b][t]))
-                            WAR.append(calculateWAR(batterDict[b][t1], lgBatterAvg))
-                            RC.append(calculateRC(batterDict[b][t1]))
-                            hits.append(int(batterDict[b][t1].hits))
-                            
-                        break
-                break             
-        
-        ## below here will not work
-        #if b in salary_data_dict and team in salary_data_dict[b]:
-            #WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
-            #batterSalaries.append(salary_data_dict[b][team])
-        #elif "2TM" in salary_data_dict[b]:
-            #noData += 1
-            #print(b,team, " has no salary data", noData)
-            #if b in salary_data_dict:
-                #print('\t', salary_data_dict[b], batterDict[b])
-
-    fit = np.polyfit(WAR, batterSalaries ,1)
-    fit_fn = np.poly1d(fit) 
-    # fit_fn is now a function which takes in x and returns an estimate for y
-    plt.figure(8)
-    plt.plot(WAR,batterSalaries,'ro', WAR, fit_fn(WAR), '--k')
-    plt.xlim(0, max(WAR)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.show()
-
-    print(linregress(WAR,batterSalaries))
-    
-    fit = np.polyfit(RC, batterSalaries ,1)
-    fit_fn = np.poly1d(fit) 
-    # fit_fn is now a function which takes in x and returns an estimate for y
-    plt.figure(9)
-    plt.plot(RC,batterSalaries,'go', RC, fit_fn(RC), '--k')
-    plt.xlim(0, max(RC)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.show()
-
-    print(linregress(RC,batterSalaries))       
-    
-    
-    plt.figure(10)
-    plt.plot(hits,batterSalaries,'bo', hits, fit_fn(hits), '--k')
-    plt.xlim(0, max(hits)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.show()
-
-    print(linregress(hits,batterSalaries))     
-    plt.show()
-
-    print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
-    
     
     era  = []
     ip = []
@@ -359,4 +269,91 @@ if __name__ == "__main__":
 
     # print("\nBatter Avg. vs. Salary: ", linregress(batteravg,salary_data),"\n")
 
+    batterSalaries = []
+    WAR = []
+    RC = []
+    hits = []
+    batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
+    for b in batterDict:
+        if b not in batterDict or b not in salary_data_dict:
+            continue
+        if "2TM" in batterDict[b]:
+            
+            for t in salary_data_dict[b]:
+                if salary_data_dict[b][t].isdigit()\
+                   and calculateRC(batterDict[b]["2TM"]) != -1:
+                    
+                    batterSalaries.append(int(salary_data_dict[b][t]))
+                    WAR.append(int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg)))
+                    RC.append(int(calculateRC(batterDict[b]["2TM"])))
+                    hits.append(int(batterDict[b]["2TM"].hits))
+                break              
+                
+                   
+        elif "3TM" in batterDict[b]:
+            for t in salary_data_dict[b]:
+                if salary_data_dict[b][t].isdigit() \
+                   and calculateRC(batterDict[b]["3TM"]) != -1:
+                    
+                    batterSalaries.append(int(salary_data_dict[b][t]))
+                    WAR.append(calculateWAR(batterDict[b]["3TM"], lgBatterAvg))
+                    RC.append(calculateRC(calculateRC(batterDict[b]["3TM"])))
+                    hits.append(int(batterDict[b]["3TM"].hits))
+                break 
+        else:
+            for t in salary_data_dict[b]:
+                if salary_data_dict[b][t].isdigit():
+                    for t1 in batterDict[b]:
+                        if  calculateRC(batterDict[b][t1]) != -1:
+                        
+                            batterSalaries.append(int(salary_data_dict[b][t]))
+                            WAR.append(calculateWAR(batterDict[b][t1], lgBatterAvg))
+                            RC.append(calculateRC(batterDict[b][t1]))
+                            hits.append(int(batterDict[b][t1].hits))
+                            
+                        break
+                break             
+        
+        ## below here will not work
+        #if b in salary_data_dict and team in salary_data_dict[b]:
+            #WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
+            #batterSalaries.append(salary_data_dict[b][team])
+        #elif "2TM" in salary_data_dict[b]:
+            #noData += 1
+            #print(b,team, " has no salary data", noData)
+            #if b in salary_data_dict:
+                #print('\t', salary_data_dict[b], batterDict[b])
 
+    fit = np.polyfit(WAR, batterSalaries ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+    plt.figure(8)
+    plt.plot(WAR,batterSalaries,'ro', WAR, fit_fn(WAR), '--k')
+    plt.xlim(0, max(WAR)+10)
+    plt.ylim(0, max(batterSalaries)*1.1)
+    plt.show()
+
+    print(linregress(WAR,batterSalaries))
+    
+    fit = np.polyfit(RC, batterSalaries ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+    plt.figure(9)
+    plt.plot(RC,batterSalaries,'go', RC, fit_fn(RC), '--k')
+    plt.xlim(0, max(RC)+10)
+    plt.ylim(0, max(batterSalaries)*1.1)
+    plt.show()
+
+    print(linregress(RC,batterSalaries))       
+    
+    
+    plt.figure(10)
+    plt.plot(hits,batterSalaries,'bo', hits, fit_fn(hits), '--k')
+    plt.xlim(0, max(hits)+10)
+    plt.ylim(0, max(batterSalaries)*1.1)
+    plt.show()
+
+    print(linregress(hits,batterSalaries))     
+    plt.show()
+
+    print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
