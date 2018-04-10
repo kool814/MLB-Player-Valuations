@@ -74,6 +74,16 @@ def createDict(data):
     
     return allStats
             
+def calculateRC(batter):
+    """
+    RC = (hits + walk) * tot_bases / (ab + walk)
+    """
+    RC = (int(batter.hits) + int(batter.walk)) * int(batter.tot_bases) \
+        /(int(batter.ab) + int(batter.walk))
+    
+    return RC
+    
+
             
 def calculateWAR(batter, lgAvg):
     """
