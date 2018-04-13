@@ -128,7 +128,9 @@ if __name__ == "__main__":
                 wins.append(int(pitcher_data[p][team].wins))
                 losses.append(int(pitcher_data[p][team].losses))
          
-    era_salary = []           
+    era_salary = []  
+    salary_pitcher =[]
+    performance_pitcher = []         
     for p in pitcher_data:
         for team in pitcher_data[p]:
             if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':    
@@ -137,7 +139,10 @@ if __name__ == "__main__":
                 era_salary.append(int(salary_data_dict[p][team]))
                 era.append(float(pitcher_data[p][team].eraplus))
                 ip.append(float(pitcher_data[p][team].ip))
-                whip.append(float(pitcher_data[p][team].whip))                
+                whip.append(float(pitcher_data[p][team].whip)) 
+                salary_pitcher.append(int(salary_data_dict[p][team]))
+                performance_var= ((float(pitcher_data[p][team].eraplus)*9 + float(pitcher_data[p][team].whip))*(int(pitcher_data[p][team].so)) )/9
+                performance_pitcher.append(float(performance_var))               
     
     
     plt.figure(2)          
@@ -349,3 +354,24 @@ if __name__ == "__main__":
     plt.show()
 
     print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
+
+    # slope=39851.569234038914, intercept=381796.48370011384
+    # Batter Performance = ((Hits+Walks)*TotalBases)/(AtBats+Walks)
+
+    # Pitcher Performance = ((eraplus*9 + whip)*so)/9
+
+    plt.figure(11)
+    fit = np.polyfit(performance_pitcher, salary_pitcher ,1)
+    fit_fn = np.poly1d(fit) 
+    plt.plot(performance_pitcher,salary_pitcher,'go', performance_pitcher, fit_fn(performance_pitcher), '--k')
+    plt.xlim(0, max(performance_pitcher)+10)
+    plt.ylim(0, max(salary_pitcher)*1.1)
+    plt.title('Pitcher Performance vs. Salary')
+    plt.xlabel('Pitcher Performance')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('Pitcher Performance vs. Salary')
+    plt.show()
+
+    print(linregress(performance_pitcher,salary_pitcher))     
+    plt.show()
+    print("\nPitcher Performance vs. Salary: ", linregress(performance_pitcher,salary_pitcher),"\n")
