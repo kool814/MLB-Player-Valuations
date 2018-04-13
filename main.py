@@ -241,6 +241,7 @@ if __name__ == "__main__":
     WAR = []
     RC = []
     hits = []
+    batter_performance =[]
     batterDict, lgBatterAvg = parseBatterData("2017_MLB_Batter_Info.md")
     for b in batterDict:
         if b not in batterDict or b not in salary_data_dict:
@@ -256,6 +257,7 @@ if __name__ == "__main__":
                     RC.append(int(calculateRC(batterDict[b]["2TM"])))
                     hits.append(int(batterDict[b]["2TM"].hits))
                     homeruns.append(int(batterDict[b]["2TM"].hr))
+                    batter_performance.append( ((int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))) + int(calculateRC(batterDict[b]["2TM"])))/2)
                 break              
                 
                    
@@ -269,6 +271,7 @@ if __name__ == "__main__":
                     RC.append(calculateRC(calculateRC(batterDict[b]["3TM"])))
                     hits.append(int(batterDict[b]["3TM"].hits))
                     homeruns.append(int(batterDict[b]["3TM"].hr))
+                    batter_performance.append( (calculateWAR(batterDict[b]["3TM"], lgBatterAvg) + calculateRC(calculateRC(batterDict[b]["3TM"]))) / 2)
                 break 
         else:
             for t in salary_data_dict[b]:
@@ -281,19 +284,12 @@ if __name__ == "__main__":
                             RC.append(calculateRC(batterDict[b][t1]))
                             hits.append(int(batterDict[b][t1].hits))
                             homeruns.append(int(batterDict[b][t1].hr))
+                            batter_performance.append( (calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2)
                             
                         break
                 break             
-        
-        ## below here will not work
-        #if b in salary_data_dict and team in salary_data_dict[b]:
-            #WAR.append(calculateWAR(batterDict[b][team], lgBatterAvg))
-            #batterSalaries.append(salary_data_dict[b][team])
-        #elif "2TM" in salary_data_dict[b]:
-            #noData += 1
-            #print(b,team, " has no salary data", noData)
-            #if b in salary_data_dict:
-                #print('\t', salary_data_dict[b], batterDict[b])
+
+
     plt.figure(7)
     fit = np.polyfit(homeruns, batterSalaries ,1)
     fit_fn = np.poly1d(fit) 
@@ -355,10 +351,14 @@ if __name__ == "__main__":
 
     print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
 
+
+
     # slope=39851.569234038914, intercept=381796.48370011384
     # Batter Performance = ((Hits+Walks)*TotalBases)/(AtBats+Walks)
-
+    
     # Pitcher Performance = ((eraplus*9 + whip)*so)/9
+    #slope=269.8848363421342, intercept=805652.9947119309
+    #y=805652.9947119309 + 269.8848363421342x
 
     plt.figure(11)
     fit = np.polyfit(performance_pitcher, salary_pitcher ,1)
@@ -375,3 +375,20 @@ if __name__ == "__main__":
     print(linregress(performance_pitcher,salary_pitcher))     
     plt.show()
     print("\nPitcher Performance vs. Salary: ", linregress(performance_pitcher,salary_pitcher),"\n")
+
+
+    #printing out batter performance
+    fit = np.polyfit(batter_performance, batterSalaries ,1)
+    fit_fn = np.poly1d(fit) 
+    # fit_fn is now a function which takes in x and returns an estimate for y
+    plt.figure(12)
+    plt.plot(batter_performance,batterSalaries,'bo', batter_performance, fit_fn(batter_performance), '--k')
+    plt.xlim(0, max(batter_performance)+10)
+    plt.ylim(0, max(batterSalaries)*1.1)
+    plt.title('Batter Performance vs. Salary')
+    plt.xlabel('Batter Performance')
+    plt.ylabel('Salary (Million per year)')
+    plt.title('Batter Performance vs. Salary')
+    plt.show()
+
+    print("\Batter Performance vs. Salary: ", linregress(batter_performance,batterSalaries))
