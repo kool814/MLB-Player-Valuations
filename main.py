@@ -355,6 +355,7 @@ if __name__ == "__main__":
 
     # slope=39851.569234038914, intercept=381796.48370011384
     # Batter Performance = ((Hits+Walks)*TotalBases)/(AtBats+Walks)
+    #(calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2
     
     # Pitcher Performance = ((eraplus*9 + whip)*so)/9
     #slope=269.8848363421342, intercept=805652.9947119309
