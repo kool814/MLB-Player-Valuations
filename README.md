@@ -17,4 +17,5 @@ Data and statistics taken from [www.fangraphs.com](http://www.fangraphs.com/) an
 
 
 
-Run Creation = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
+Batter Performance = ((Hits + Walks)* TotalBases)/(AtBats + Walks)
+Pitcher Performance = ((ERA+*9 + WHIP)*StrikeOuts)/9
