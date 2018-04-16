@@ -204,38 +204,7 @@ if __name__ == "__main__":
 
 
     homeruns  = []
-    # # salary_data = []
-    # for p in pitcher_data:
-    #     for team in pitcher_data[p]:
-    #         if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
-    #             # salary_data.append(int(salary_data_dict[p][team]))
-    #             homeruns.append(int(pitcher_data[p][team].so))
-    #             # print(p, salary_data[team], strikeouts[team]) 
-                
-
-    # batteravg  = []
-    # for p in pitcher_data:
-    #     for team in pitcher_data[p]:
-    #         if p in salary_data_dict and team in salary_data_dict[p] and salary_data_dict[p][team] != '':
-    #             batteravg.append(int(pitcher_data[p][team].so))
-                
-
-    # plt.figure(7)
-    # fit = np.polyfit(batteravg, salary_data ,1)
-    # fit_fn = np.poly1d(fit) 
-    # # fit_fn is now a function which takes in x and returns an estimate for y
-
-    # plt.plot(batteravg,salary_data,'yo', batteravg, fit_fn(batteravg), '--k')
-    # plt.xlim(0, max(batteravg)+10)
-    # plt.ylim(0, max(salary_data)*1.1)
-    # plt.title('Batter Avg. vs. Salary')
-    # plt.xlabel('Batter Avg.')
-    # plt.ylabel('Salary (Million per year)')
-    # plt.title('Batter Avg. vs. Salary')
-
-    # plt.show()
-
-    # print("\nBatter Avg. vs. Salary: ", linregress(batteravg,salary_data),"\n")
+    batter_stddev = {}
 
     batterSalaries = []
     WAR = []
@@ -258,6 +227,7 @@ if __name__ == "__main__":
                     hits.append(int(batterDict[b]["2TM"].hits))
                     homeruns.append(int(batterDict[b]["2TM"].hr))
                     batter_performance.append( ((int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))) + int(calculateRC(batterDict[b]["2TM"])))/2)
+                    batter_stddev[b]=(((int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))) + int(calculateRC(batterDict[b]["2TM"])))/2, int(salary_data_dict[b][t]), t)
                 break              
                 
                    
@@ -272,6 +242,7 @@ if __name__ == "__main__":
                     hits.append(int(batterDict[b]["3TM"].hits))
                     homeruns.append(int(batterDict[b]["3TM"].hr))
                     batter_performance.append( (calculateWAR(batterDict[b]["3TM"], lgBatterAvg) + calculateRC(calculateRC(batterDict[b]["3TM"]))) / 2)
+                    batter_stddev[b]=((calculateWAR(batterDict[b]["3TM"], lgBatterAvg) + calculateRC(calculateRC(batterDict[b]["3TM"]))) / 2, int(salary_data_dict[b][t]), t)
                 break 
         else:
             for t in salary_data_dict[b]:
@@ -285,7 +256,8 @@ if __name__ == "__main__":
                             hits.append(int(batterDict[b][t1].hits))
                             homeruns.append(int(batterDict[b][t1].hr))
                             batter_performance.append( (calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2)
-                            
+                            batter_stddev[b]=((calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2, int(salary_data_dict[b][t]), t)
+
                         break
                 break             
 
@@ -355,11 +327,11 @@ if __name__ == "__main__":
 
     # slope=39851.569234038914, intercept=381796.48370011384
     # Batter Performance = ((Hits+Walks)*TotalBases)/(AtBats+Walks)
-    #(calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2
+    # (calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2
     
     # Pitcher Performance = ((eraplus*9 + whip)*so)/9
-    #slope=269.8848363421342, intercept=805652.9947119309
-    #y=805652.9947119309 + 269.8848363421342x
+    # slope=269.8848363421342, intercept=805652.9947119309
+    # y=805652.9947119309 + 269.8848363421342x
 
     plt.figure(11)
     fit = np.polyfit(performance_pitcher, salary_pitcher ,1)
@@ -393,3 +365,13 @@ if __name__ == "__main__":
     plt.show()
 
     print("\Batter Performance vs. Salary: ", linregress(batter_performance,batterSalaries))
+
+    # slope=113157.51606591184, intercept=1482766.8135094214
+    # Salary = 113157.51606591184*performance + 1482766.8135094214
+    #batter perfomance: ((int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))) + int(calculateRC(batterDict[b]["2TM"])))/2
+    batter_sort={}
+    for key, value in batter_stddev.items():
+        std_dev= value[1] - 113157.51606591184*value[0] + 1482766.8135094214
+        batter_sort[std_dev] = (key,value[2])
+    for key, value in sorted(batter_sort.items(), key=lambda x: x[0]): 
+        print("{}({}): {}".format(value[0],value[1], key))
