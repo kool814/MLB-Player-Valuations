@@ -387,3 +387,5 @@ if __name__ == "__main__":
     plt.xlabel("X1 - a predictor")
     plt.ylabel("residual")
     plt.show()
+    for key, value in sorted(batter_sort.items(), key=lambda x: x[0]): 
+        print("{}({}): ${:.2f}".format(value[0],value[1], key))
