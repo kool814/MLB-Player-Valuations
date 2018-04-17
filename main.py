@@ -100,20 +100,20 @@ if __name__ == "__main__":
                 salary_data.append(int(salary_data_dict[p][team]))
                 strikeouts.append(int(pitcher_data[p][team].so))
                 
-    plt.figure(1)
-    fit = np.polyfit(strikeouts, salary_data ,1)
-    fit_fn = np.poly1d(fit) 
-    # fit_fn is now a function which takes in x and returns an estimate for y
+    # plt.figure(1)
+    # fit = np.polyfit(strikeouts, salary_data ,1)
+    # fit_fn = np.poly1d(fit) 
+    # # fit_fn is now a function which takes in x and returns an estimate for y
     
-    plt.figure(1)
-    plt.plot(strikeouts,salary_data,'go', strikeouts, fit_fn(strikeouts), '--k')
-    plt.xlim(0, max(strikeouts)+10)
-    plt.ylim(0, max(salary_data)*1.1)
-    plt.title('Strikeouts vs. Salary')
-    plt.xlabel('Strikeouts')
-    plt.ylabel('Salary (Million per year)')
+    # plt.figure(1)
+    # plt.plot(strikeouts,salary_data,'go', strikeouts, fit_fn(strikeouts), '--k')
+    # plt.xlim(0, max(strikeouts)+10)
+    # plt.ylim(0, max(salary_data)*1.1)
+    # plt.title('Strikeouts vs. Salary')
+    # plt.xlabel('Strikeouts')
+    # plt.ylabel('Salary (Million per year)')
 
-    print(linregress(strikeouts,salary_data))
+    # print(linregress(strikeouts,salary_data))
     
     era  = []
     ip = []
@@ -145,60 +145,60 @@ if __name__ == "__main__":
                 performance_pitcher.append(float(performance_var))               
     
     
-    plt.figure(2)          
-    plt.plot(wins,salary_winslosses,'go', wins, fit_fn(wins), '--k')
-    plt.xlim(0, max(wins)+10)
-    plt.ylim(0, max(salary_winslosses)*1.1)
-    plt.xlabel('Wins')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Wins vs. Salary')
-    plt.show()
-    print("\nWins vs. Salary: ", linregress(wins,salary_winslosses),"\n")
+    # plt.figure(2)          
+    # plt.plot(wins,salary_winslosses,'go', wins, fit_fn(wins), '--k')
+    # plt.xlim(0, max(wins)+10)
+    # plt.ylim(0, max(salary_winslosses)*1.1)
+    # plt.xlabel('Wins')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Wins vs. Salary')
+    # plt.show()
+    # print("\nWins vs. Salary: ", linregress(wins,salary_winslosses),"\n")
     
-    plt.figure(3)         
-    plt.plot(losses,salary_winslosses,'go', losses, fit_fn(losses), '--k')
-    plt.xlim(0, max(losses)+10)
-    plt.ylim(0, max(salary_winslosses)*1.1)
-    plt.xlabel('Loss')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Loss vs. Salary')
-    plt.show()    
+    # plt.figure(3)         
+    # plt.plot(losses,salary_winslosses,'go', losses, fit_fn(losses), '--k')
+    # plt.xlim(0, max(losses)+10)
+    # plt.ylim(0, max(salary_winslosses)*1.1)
+    # plt.xlabel('Loss')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Loss vs. Salary')
+    # plt.show()    
 
-    print("\nLoss vs. Salary: ", linregress(losses,salary_winslosses),"\n")
+    # print("\nLoss vs. Salary: ", linregress(losses,salary_winslosses),"\n")
 
 
-    plt.figure(4)         
-    plt.plot(era,era_salary,'go', era, fit_fn(era), '--k')
-    plt.xlim(0, max(era)+10)
-    plt.ylim(0, max(era_salary)*1.1)
-    plt.xlabel('Era')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Era vs. Salary')
-    plt.show()
+    # plt.figure(4)         
+    # plt.plot(era,era_salary,'go', era, fit_fn(era), '--k')
+    # plt.xlim(0, max(era)+10)
+    # plt.ylim(0, max(era_salary)*1.1)
+    # plt.xlabel('Era')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Era vs. Salary')
+    # plt.show()
 
-    print("\nEra vs. Salary: ", linregress(era,era_salary),"\n")
+    # print("\nEra vs. Salary: ", linregress(era,era_salary),"\n")
 
-    plt.figure(5)         
-    plt.plot(ip,era_salary,'go', ip, fit_fn(ip), '--k')
-    plt.xlim(0, max(ip)+10)
-    plt.ylim(0, max(era_salary)*1.1)
-    plt.xlabel('IP')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('IP vs. Salary')
-    plt.show()    
+    # plt.figure(5)         
+    # plt.plot(ip,era_salary,'go', ip, fit_fn(ip), '--k')
+    # plt.xlim(0, max(ip)+10)
+    # plt.ylim(0, max(era_salary)*1.1)
+    # plt.xlabel('IP')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('IP vs. Salary')
+    # plt.show()    
 
-    print("\nIP vs. Salary: ", linregress(ip,era_salary),"\n")
+    # print("\nIP vs. Salary: ", linregress(ip,era_salary),"\n")
 
-    plt.figure(6)         
-    plt.plot(whip,era_salary,'go', whip, fit_fn(whip), '--k')
-    plt.xlim(0, max(whip)+1)
-    plt.ylim(0, max(era_salary)*1.1)
-    plt.xlabel('WHIP')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('WHIP vs. Salary')
-    plt.show()    
+    # plt.figure(6)         
+    # plt.plot(whip,era_salary,'go', whip, fit_fn(whip), '--k')
+    # plt.xlim(0, max(whip)+1)
+    # plt.ylim(0, max(era_salary)*1.1)
+    # plt.xlabel('WHIP')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('WHIP vs. Salary')
+    # plt.show()    
 
-    print("\nWHIP vs. Salary: ", linregress(whip,era_salary),"\n")    
+    # print("\nWHIP vs. Salary: ", linregress(whip,era_salary),"\n")    
 
 
 
@@ -262,92 +262,92 @@ if __name__ == "__main__":
                 break             
 
 
-    plt.figure(7)
-    fit = np.polyfit(homeruns, batterSalaries ,1)
-    fit_fn = np.poly1d(fit) 
+    # plt.figure(7)
+    # fit = np.polyfit(homeruns, batterSalaries ,1)
+    # fit_fn = np.poly1d(fit) 
 
-    plt.plot(homeruns,batterSalaries,'bo', homeruns, fit_fn(homeruns), '--k')
-    plt.xlim(0, max(homeruns)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.title('Home Runs vs. Salary')
-    plt.xlabel('Home Runs')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Home Runs vs. Salary')
-    plt.show()
+    # plt.plot(homeruns,batterSalaries,'bo', homeruns, fit_fn(homeruns), '--k')
+    # plt.xlim(0, max(homeruns)+10)
+    # plt.ylim(0, max(batterSalaries)*1.1)
+    # plt.title('Home Runs vs. Salary')
+    # plt.xlabel('Home Runs')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Home Runs vs. Salary')
+    # plt.show()
 
-    print("\nHome Runs vs. Salary: ", linregress(homeruns,batterSalaries),"\n")
+    # print("\nHome Runs vs. Salary: ", linregress(homeruns,batterSalaries),"\n")
 
-    fit = np.polyfit(WAR, batterSalaries ,1)
-    fit_fn = np.poly1d(fit) 
-    # fit_fn is now a function which takes in x and returns an estimate for y
-    plt.figure(8)
-    plt.plot(WAR,batterSalaries,'bo', WAR, fit_fn(WAR), '--k')
-    plt.xlim(0, max(WAR)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.title('WAR vs. Salary')
-    plt.xlabel('WAR')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('WAR vs. Salary')
-    plt.show()
+    # fit = np.polyfit(WAR, batterSalaries ,1)
+    # fit_fn = np.poly1d(fit) 
+    # # fit_fn is now a function which takes in x and returns an estimate for y
+    # plt.figure(8)
+    # plt.plot(WAR,batterSalaries,'bo', WAR, fit_fn(WAR), '--k')
+    # plt.xlim(0, max(WAR)+10)
+    # plt.ylim(0, max(batterSalaries)*1.1)
+    # plt.title('WAR vs. Salary')
+    # plt.xlabel('WAR')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('WAR vs. Salary')
+    # plt.show()
 
-    print("\nWAR vs. Salary: ", linregress(WAR,batterSalaries))
+    # print("\nWAR vs. Salary: ", linregress(WAR,batterSalaries))
     
-    fit = np.polyfit(RC, batterSalaries ,1)
-    fit_fn = np.poly1d(fit) 
-    # fit_fn is now a function which takes in x and returns an estimate for y
-    plt.figure(9)
-    plt.plot(RC,batterSalaries,'bo', RC, fit_fn(RC), '--k')
-    plt.xlim(0, max(RC)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.title('Run Creation vs. Salary')
-    plt.xlabel('Run Creation')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Run Creation vs. Salary')
-    plt.show()
+    # fit = np.polyfit(RC, batterSalaries ,1)
+    # fit_fn = np.poly1d(fit) 
+    # # fit_fn is now a function which takes in x and returns an estimate for y
+    # plt.figure(9)
+    # plt.plot(RC,batterSalaries,'bo', RC, fit_fn(RC), '--k')
+    # plt.xlim(0, max(RC)+10)
+    # plt.ylim(0, max(batterSalaries)*1.1)
+    # plt.title('Run Creation vs. Salary')
+    # plt.xlabel('Run Creation')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Run Creation vs. Salary')
+    # plt.show()
 
-    print("\nRun Creation vs. Salary: ", linregress(RC,batterSalaries))       
+    # print("\nRun Creation vs. Salary: ", linregress(RC,batterSalaries))       
     
     
-    plt.figure(10)
-    plt.plot(hits,batterSalaries,'bo', hits, fit_fn(hits), '--k')
-    plt.xlim(0, max(hits)+10)
-    plt.ylim(0, max(batterSalaries)*1.1)
-    plt.title('Strikeouts vs. Salary')
-    plt.xlabel('Strikeouts')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Strikeouts vs. Salary')
-    plt.show()
+    # plt.figure(10)
+    # plt.plot(hits,batterSalaries,'bo', hits, fit_fn(hits), '--k')
+    # plt.xlim(0, max(hits)+10)
+    # plt.ylim(0, max(batterSalaries)*1.1)
+    # plt.title('Strikeouts vs. Salary')
+    # plt.xlabel('Strikeouts')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Strikeouts vs. Salary')
+    # plt.show()
 
-    print(linregress(hits,batterSalaries))     
-    plt.show()
+    # print(linregress(hits,batterSalaries))     
+    # plt.show()
 
-    print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
+    # print("\nStrikeouts vs. Salary: ", linregress(strikeouts,salary_data),"\n")
 
 
 
-    # slope=39851.569234038914, intercept=381796.48370011384
-    # Batter Performance = ((Hits+Walks)*TotalBases)/(AtBats+Walks)
-    # (calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2
+    # # slope=39851.569234038914, intercept=381796.48370011384
+    # # Batter Performance = ((Hits+Walks)*TotalBases)/(AtBats+Walks)
+    # # (calculateWAR(batterDict[b][t1], lgBatterAvg) + calculateRC(batterDict[b][t1])) / 2
     
-    # Pitcher Performance = ((eraplus*9 + whip)*so)/9
-    # slope=269.8848363421342, intercept=805652.9947119309
-    # y=805652.9947119309 + 269.8848363421342x
+    # # Pitcher Performance = ((eraplus*9 + whip)*so)/9
+    # # slope=269.8848363421342, intercept=805652.9947119309
+    # # y=805652.9947119309 + 269.8848363421342x
 
-    plt.figure(11)
-    fit = np.polyfit(performance_pitcher, salary_pitcher ,1)
-    fit_fn = np.poly1d(fit) 
-    plt.plot(performance_pitcher,salary_pitcher,'go', performance_pitcher, fit_fn(performance_pitcher), '--k')
-    plt.xlim(0, max(performance_pitcher)+10)
-    plt.ylim(0, max(salary_pitcher)*1.1)
-    plt.title('Pitcher Performance vs. Salary')
-    plt.xlabel('Pitcher Performance')
-    plt.ylabel('Salary (Million per year)')
-    plt.title('Pitcher Performance vs. Salary')
-    plt.show()
+    # plt.figure(11)
+    # fit = np.polyfit(performance_pitcher, salary_pitcher ,1)
+    # fit_fn = np.poly1d(fit) 
+    # plt.plot(performance_pitcher,salary_pitcher,'go', performance_pitcher, fit_fn(performance_pitcher), '--k')
+    # plt.xlim(0, max(performance_pitcher)+10)
+    # plt.ylim(0, max(salary_pitcher)*1.1)
+    # plt.title('Pitcher Performance vs. Salary')
+    # plt.xlabel('Pitcher Performance')
+    # plt.ylabel('Salary (Million per year)')
+    # plt.title('Pitcher Performance vs. Salary')
+    # plt.show()
 
-    print(linregress(performance_pitcher,salary_pitcher))     
-    plt.show()
-    print("\nPitcher Performance vs. Salary: ", linregress(performance_pitcher,salary_pitcher),"\n")
+    # print(linregress(performance_pitcher,salary_pitcher))     
+    # plt.show()
+    # print("\nPitcher Performance vs. Salary: ", linregress(performance_pitcher,salary_pitcher),"\n")
 
 
     #printing out batter performance
@@ -370,8 +370,20 @@ if __name__ == "__main__":
     # Salary = 113157.51606591184*performance + 1482766.8135094214
     #batter perfomance: ((int(calculateWAR(batterDict[b]["2TM"], lgBatterAvg))) + int(calculateRC(batterDict[b]["2TM"])))/2
     batter_sort={}
+    std_dev_vals=[]
     for key, value in batter_stddev.items():
         std_dev= value[1] - 113157.51606591184*value[0] + 1482766.8135094214
+        if(std_dev<.5 and std_dev>0):
+            std_dev_vals.append(std_dev-2)
+            print("yes")
+        else:
+            std_dev_vals.append(std_dev)
         batter_sort[std_dev] = (key,value[2])
-    for key, value in sorted(batter_sort.items(), key=lambda x: x[0]): 
-        print("{}({}): {}".format(value[0],value[1], key))
+    # for key, value in sorted(batter_sort.items(), key=lambda x: x[0]): 
+    #     print("{}({}): {}".format(value[0],value[1], key))
+    print(std_dev_vals)
+    
+    plt.scatter(batter_performance,std_dev_vals)
+    plt.xlabel("X1 - a predictor")
+    plt.ylabel("residual")
+    plt.show()
