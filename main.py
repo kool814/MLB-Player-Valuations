@@ -374,4 +374,4 @@ if __name__ == "__main__":
         std_dev= value[1] - 113157.51606591184*value[0] + 1482766.8135094214
         batter_sort[std_dev] = (key,value[2])
     for key, value in sorted(batter_sort.items(), key=lambda x: x[0]): 
-        print("{}({}): {}".format(value[0],value[1], key))
+        print("{}({}): ${:.2f}".format(value[0],value[1], key))
