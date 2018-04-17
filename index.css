@@ -11,3 +11,25 @@ h1 {
 body {
 	background-image: url("baseball2.jpg");
 }
+
+.maingraphs {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: 35%;
+}
+
+/*#pitcher {
+	float: left;
+}
+
+#batter {
+	float: right;
+}
+*/
+.smallgraphs {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: 35%;
+}
