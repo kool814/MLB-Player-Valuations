@@ -15,21 +15,19 @@ body {
 .maingraphs {
 	display: block;
 	margin-right: auto;
-	margin-left: auto;
-	width: 35%;
+	margin-left: 15%;
+
 }
 
-/*#pitcher {
-	float: left;
-}
-
-#batter {
-	float: right;
-}
-*/
 .smallgraphs {
 	display: block;
 	margin-right: auto;
+	margin-left: 15%;
+}
+
+#results {
+	display: block;
 	margin-left: auto;
-	width: 35%;
+	margin-right: auto;
+	width: 50%;
 }
